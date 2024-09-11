@@ -3,8 +3,8 @@
 #include <fstream>
 #include <cstring>
 #include <vector>
-#include "../include/nanosvg.h"
-#include "../include/nanosvgrast.h"
+#include "../../include/nanosvg.h"
+#include "../../include/nanosvgrast.h"
 
 ResourceManager& ResourceManager::getInstance() {
     static ResourceManager instance;

@@ -1,15 +1,15 @@
-#ifndef NOT_GATE_H
-#define NOT_GATE_H
+#ifndef AND_GATE_H
+#define AND_GATE_H
 
-#include "Component.h"
+#include "../core/Component.h"
 
-class NotGate : public Component {
+class AndGate : public Component {
 public:
-    NotGate(Vector2 position);
+    AndGate(Vector2 position);
     void Update() override;
     void Draw() const override;
     Vector2 GetInputPinPosition(int index) const override;
     Vector2 GetOutputPinPosition(int index) const override;
 };
 
-#endif // NOT_GATE_H
+#endif // AND_GATE_H

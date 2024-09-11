@@ -1,5 +1,5 @@
 #include "Component.h"
-#include "ResourceManager.h"
+#include "../utils/ResourceManager.h"
 
 Component::Component(Vector2 position, const std::string& textureKey, int numInputs, int numOutputs)
     : position(position), textureKey(textureKey), numInputs(numInputs), numOutputs(numOutputs)

@@ -1,10 +1,10 @@
 #include "raylib.h"
-#include "Component.h"
-#include "AndGate.h"
-#include "OrGate.h"
-#include "NotGate.h"
-#include "Wire.h"
-#include "ResourceManager.h"
+#include "core/Component.h"
+#include "gates/AndGate.h"
+#include "gates/OrGate.h"
+#include "gates/NotGate.h"
+#include "utils/Wire.h"
+#include "utils/ResourceManager.h"
 #include <iostream>
 #include <vector>
 

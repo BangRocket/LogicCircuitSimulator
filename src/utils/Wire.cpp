@@ -1,5 +1,5 @@
 #include "Wire.h"
-#include "Component.h"
+#include "../core/Component.h"
 #include <cmath>
 
 Wire::Wire(Component* start, int startPin, Component* end, int endPin)

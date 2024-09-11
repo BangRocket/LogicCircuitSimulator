@@ -1,7 +1,7 @@
 #ifndef OR_GATE_H
 #define OR_GATE_H
 
-#include "Component.h"
+#include "../core/Component.h"
 
 class OrGate : public Component {
 public:

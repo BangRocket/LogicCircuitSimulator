@@ -38,6 +38,9 @@ add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 # Include directories
 target_include_directories(${PROJECT_NAME} PRIVATE 
     ${CMAKE_SOURCE_DIR}/src
+    ${CMAKE_SOURCE_DIR}/src/core
+    ${CMAKE_SOURCE_DIR}/src/gates
+    ${CMAKE_SOURCE_DIR}/src/utils
     ${CMAKE_SOURCE_DIR}/include
 )
 

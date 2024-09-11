@@ -1,5 +1,5 @@
 #include "AndGate.h"
-#include "ResourceManager.h"
+#include "../utils/ResourceManager.h"
 #include <iostream>
 
 AndGate::AndGate(Vector2 position) : Component(position, "and_gate", 2, 1) {
