@@ -33,21 +33,23 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Define a grid size (e.g., 32x32 pixels per cell).
    - [x] Implement grid snapping (convert screen coordinates to grid coordinates).
    - [x] Create a basic grid-drawing function using raylib's `DrawLine()`.
-   - [ ] Ensure components will snap to the grid for placement.
+   - [x] Ensure components will snap to the grid for placement.
 
 ---
 
 ### **5. Rendering System**
    - [x] Create a function to draw the grid on the screen.
-   - [ ] Set up a placeholder function to draw components (e.g., gates, wires) in the future.
+   - [x] Set up a placeholder function to draw components (e.g., gates, wires) in the future.
    - [ ] Add dynamic color changing for grid lines or cells to visualize component placement.
+   - [ ] Implement a basic camera system for panning and zooming the grid.
 
 ---
 
 ### **6. Resource Management**
-   - [ ] Implement a basic resource loader (optional for now).
-   - [ ] Load placeholder textures (or draw shapes) for gates and components.
+   - [x] Implement a basic resource loader.
+   - [x] Load placeholder textures (or draw shapes) for gates and components.
    - [ ] Set up a system to easily add and manage textures/sprites for future components.
+   - [ ] Implement a resource cleanup function to free memory when closing the application.
 
 ---
 
@@ -71,3 +73,7 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Implement basic logic simulation (signal propagation, gate behavior).
    - [ ] Design and implement the UI for component selection, control panel, etc.
    - [ ] Add task/challenge systems and sandbox mode.
+   - [ ] Implement a save/load system for circuits.
+   - [ ] Add an undo/redo system for user actions.
+   - [ ] Create a basic tutorial system to guide new users.
+   - [ ] Implement a circuit validation system to check for errors.
