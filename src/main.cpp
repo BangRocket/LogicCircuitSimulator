@@ -74,12 +74,6 @@ int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Logic Circuit Simulator");
     SetTargetFPS(60);
 
-    // Load textures
-    ResourceManager::getInstance().loadTexture("and_gate", "assets/and_gate.png");
-    ResourceManager::getInstance().loadTexture("or_gate", "assets/or_gate.png");
-    ResourceManager::getInstance().loadTexture("not_gate", "assets/not_gate.png");
-    ResourceManager::getInstance().loadTexture("input_switch", "assets/input_switch.png");
-
     while (!WindowShouldClose()) {
         HandleInput();
         Update();

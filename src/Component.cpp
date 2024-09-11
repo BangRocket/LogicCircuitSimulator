@@ -25,17 +25,27 @@ void Component::SetPosition(Vector2 newPosition)
     position = newPosition;
 }
 
+Vector2 Component::GetInputPinPosition(int index) const
+{
+    // Default implementation, can be overridden by derived classes
+    return { position.x, position.y + 30.0f + index * 40.0f };
+}
+
+Vector2 Component::GetOutputPinPosition(int index) const
+{
+    // Default implementation, can be overridden by derived classes
+    return { position.x + 100.0f, position.y + 50.0f };
+}
+
 Vector2 Component::GetPinPosition(int pinIndex) const
 {
-    const int PIN_SPACING = 32;
     if (pinIndex < numInputs)
     {
-        return { position.x, position.y + (pinIndex + 1) * PIN_SPACING };
+        return GetInputPinPosition(pinIndex);
     }
     else
     {
-        int outputIndex = pinIndex - numInputs;
-        return { position.x + 64, position.y + (outputIndex + 1) * PIN_SPACING };
+        return GetOutputPinPosition(pinIndex - numInputs);
     }
 }
 
@@ -69,13 +79,13 @@ void Component::DrawPins() const
 {
     for (int i = 0; i < numInputs; ++i)
     {
-        Vector2 pinPos = GetPinPosition(i);
-        DrawCircle(pinPos.x, pinPos.y, 4, inputStates[i] ? RED : GRAY);
+        Vector2 pinPos = GetInputPinPosition(i);
+        DrawCircle(pinPos.x, pinPos.y, 5, inputStates[i] ? RED : BLACK);
     }
 
     for (int i = 0; i < numOutputs; ++i)
     {
-        Vector2 pinPos = GetPinPosition(i + numInputs);
-        DrawCircle(pinPos.x, pinPos.y, 4, outputStates[i] ? RED : GRAY);
+        Vector2 pinPos = GetOutputPinPosition(i);
+        DrawCircle(pinPos.x, pinPos.y, 5, outputStates[i] ? RED : BLACK);
     }
 }

@@ -16,6 +16,8 @@ public:
     Vector2 GetPosition() const;
     void SetPosition(Vector2 newPosition);
 
+    virtual Vector2 GetInputPinPosition(int index) const;
+    virtual Vector2 GetOutputPinPosition(int index) const;
     Vector2 GetPinPosition(int pinIndex) const;
     bool GetInputState(int inputIndex) const;
     bool GetOutputState(int outputIndex) const;
