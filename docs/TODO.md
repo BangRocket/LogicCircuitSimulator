@@ -40,8 +40,17 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ### **5. Rendering System**
    - [x] Create a function to draw the grid on the screen.
    - [x] Set up a placeholder function to draw components (e.g., gates, wires) in the future.
-   - [ ] Add dynamic color changing for grid lines or cells to visualize component placement.
+   - [x] Add dynamic color changing for grid lines or cells to visualize component placement.
    - [ ] Implement a basic camera system for panning and zooming the grid.
+   - [x] Add a function to highlight the grid cell under the mouse cursor.
+   - [ ] Implement a function to draw placeholder components on the grid.
+
+### **8. Testing and Iteration**
+   - [x] Test the core loop for stability (input, rendering, and frame rate consistency).
+   - [x] Test grid snapping with different grid sizes.
+   - [x] Test mouse input handling and ensure clicks/positions are correctly captured.
+   - [ ] Ensure that the window can resize without breaking the grid system.
+   - [ ] Test the dynamic color changing of grid cells for responsiveness and visual clarity.
 
 ---
 
