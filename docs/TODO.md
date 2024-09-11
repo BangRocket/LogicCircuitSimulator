@@ -127,14 +127,16 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Add visual feedback when hovering over components or pins.
    - [x] Implement a way to rotate components.
    - [x] Implement keyboard shortcuts for rotation (e.g., 'R' to rotate 90 degrees clockwise).
-   - [ ] Add a way to delete wires.
+   - [x] Add a way to delete wires.
    - [ ] Implement component dragging and repositioning.
    - [ ] Add UI element to show current rotation angle.
    - [ ] Implement a context menu for component actions (rotate, delete, etc.).
    - [ ] Add undo/redo functionality for user actions.
-   - [ ] Implement a zoom in/out feature for the circuit view.
+   - [x] Implement a zoom in/out feature for the circuit view.
    - [ ] Add a mini-map for large circuits.
    - [ ] Implement a search function to find components in complex circuits.
+   - [ ] Add visual feedback when deleting wires.
+   - [ ] Implement a way to select multiple components or wires.
 
 ---
 

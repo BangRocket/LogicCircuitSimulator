@@ -23,6 +23,7 @@ public:
     void UpdateEndPosition(Vector2 newEndPos);
     void UpdateConnectionsAfterRotation();
     void RecalculateWirePath();
+    bool IsPointOnWire(Vector2 point) const;
 
 private:
     Component* startComponent;
@@ -33,6 +34,7 @@ private:
     bool signalState;
 
     void CalculateWirePoints();
+    bool IsPointOnLineSegment(Vector2 point, Vector2 lineStart, Vector2 lineEnd) const;
 
     friend class ConnectionManager;
 };

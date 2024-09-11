@@ -7,6 +7,7 @@
 #include "circuit_elements/Wire.h"
 #include "managers/ResourceManager.h"
 #include "managers/ComponentManager.h"
+#include "managers/ConnectionManager.h"
 #include "rendering/Renderer.h"
 #include "core/GameState.h"
 #include <iostream>
@@ -31,6 +32,7 @@ void Update();
 Component* GetComponentAtPosition(Vector2 position);
 int GetPinAtPosition(Component* component, Vector2 position);
 void UpdateWiresForComponent(Component* component);
+Wire* GetWireAtPosition(Vector2 position);
 
 // Global variables
 ProgramState currentState = ProgramState::IDLE;
@@ -245,6 +247,14 @@ void HandleInput() {
         showDebugInfo = !showDebugInfo;
     }
 
+    // Handle wire deletion
+    if (IsKeyPressed(KEY_DELETE) || IsKeyPressed(KEY_BACKSPACE)) {
+        Wire* wireToDelete = GetWireAtPosition(worldMousePos);
+        if (wireToDelete) {
+            ConnectionManager::getInstance().removeWire(wireToDelete);
+        }
+    }
+
     wireEndPos = worldMousePos;
     prevMousePos = mousePosition;
 
@@ -298,4 +308,13 @@ void UpdateWiresForComponent(Component* component) {
             wire->UpdateConnectionsAfterRotation();
         }
     }
+}
+
+Wire* GetWireAtPosition(Vector2 position) {
+    for (auto& wire : wires) {
+        if (wire->IsPointOnWire(position)) {
+            return wire;
+        }
+    }
+    return nullptr;
 }

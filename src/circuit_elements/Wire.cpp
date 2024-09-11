@@ -59,6 +59,28 @@ void Wire::CalculateWirePoints()
     points.push_back(endPos);
 }
 
+bool Wire::IsPointOnWire(Vector2 point) const {
+    for (size_t i = 1; i < points.size(); ++i) {
+        if (IsPointOnLineSegment(point, points[i-1], points[i])) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool Wire::IsPointOnLineSegment(Vector2 point, Vector2 lineStart, Vector2 lineEnd) const {
+    const float TOLERANCE = 5.0f;  // Adjust this value to change the "thickness" of the wire for selection
+    
+    float d1 = Vector2Distance(point, lineStart);
+    float d2 = Vector2Distance(point, lineEnd);
+    float lineLen = Vector2Distance(lineStart, lineEnd);
+    
+    if (d1 + d2 >= lineLen - TOLERANCE && d1 + d2 <= lineLen + TOLERANCE) {
+        return true;
+    }
+    return false;
+}
+
 void Wire::UpdateEndPosition(Vector2 newEndPos)
 {
     // This method is now only used for temporary wires during dragging
