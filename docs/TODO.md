@@ -10,22 +10,22 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ---
 
 ### **2. Core Engine Loop**
-   - [ ] Initialize raylib and create a window.
-   - [ ] Set a target frame rate (60 FPS).
-   - [ ] Implement a basic core loop that handles:
-     - [ ] Input handling.
-     - [ ] Update logic.
-     - [ ] Rendering.
-     - [ ] Cleanup (exit conditions).
+   - [x] Initialize raylib and create a window.
+   - [x] Set a target frame rate (60 FPS).
+   - [x] Implement a basic core loop that handles:
+     - [x] Input handling.
+     - [x] Update logic.
+     - [x] Rendering.
+     - [x] Cleanup (exit conditions).
 
 ---
 
 ### **3. Input System**
-   - [ ] Capture mouse position using `GetMousePosition()`.
-   - [ ] Implement basic mouse click detection (left-click).
-   - [ ] Add mouse drag detection (for future components and wire placement).
-   - [ ] Capture keyboard inputs for shortcuts (undo, redo, etc.).
-   - [ ] Create a placeholder function to handle different input events.
+   - [x] Capture mouse position using `GetMousePosition()`.
+   - [x] Implement basic mouse click detection (left-click).
+   - [x] Add mouse drag detection (for future components and wire placement).
+   - [x] Capture keyboard inputs for shortcuts (undo, redo, etc.).
+   - [x] Create a placeholder function to handle different input events.
 
 ---
 

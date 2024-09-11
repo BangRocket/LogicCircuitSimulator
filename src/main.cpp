@@ -13,10 +13,12 @@ void Render();
 void DrawGrid();
 Vector2 SnapToGrid(Vector2 position);
 void DrawPlaceholderComponent(Vector2 position);
+void DrawDebugInfo();
 
 // Global variables
 bool isPlacingComponent = false;
 Vector2 componentPosition = {0, 0};
+bool showDebugInfo = true;
 
 int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Logic Circuit Simulator");
@@ -37,10 +39,8 @@ void HandleInput() {
     Vector2 snappedPosition = SnapToGrid(mousePosition);
     
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
-        std::cout << "Left mouse button clicked at: (" << snappedPosition.x << ", " << snappedPosition.y << ")" << std::endl;
         if (isPlacingComponent) {
             isPlacingComponent = false;
-            std::cout << "Component placed at: (" << componentPosition.x << ", " << componentPosition.y << ")" << std::endl;
         } else {
             isPlacingComponent = true;
             componentPosition = snappedPosition;
@@ -48,15 +48,19 @@ void HandleInput() {
     }
 
     if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-        std::cout << "Mouse dragging at: (" << snappedPosition.x << ", " << snappedPosition.y << ")" << std::endl;
+        // Mouse dragging logic will be implemented here
     }
 
     if (IsKeyPressed(KEY_U)) {
-        std::cout << "Undo shortcut pressed" << std::endl;
+        // Undo logic will be implemented here
     }
 
     if (IsKeyPressed(KEY_R)) {
-        std::cout << "Redo shortcut pressed" << std::endl;
+        // Redo logic will be implemented here
+    }
+
+    if (IsKeyPressed(KEY_D)) {
+        showDebugInfo = !showDebugInfo;
     }
 
     if (isPlacingComponent) {
@@ -80,9 +84,9 @@ void Render() {
     
     DrawText("Logic Circuit Simulator", 190, 200, 20, LIGHTGRAY);
     
-    Vector2 mousePosition = GetMousePosition();
-    Vector2 snappedPosition = SnapToGrid(mousePosition);
-    DrawText(TextFormat("Mouse Position: (%.0f, %.0f)", snappedPosition.x, snappedPosition.y), 10, 10, 20, DARKGRAY);
+    if (showDebugInfo) {
+        DrawDebugInfo();
+    }
     
     EndDrawing();
 }
@@ -106,4 +110,12 @@ Vector2 SnapToGrid(Vector2 position) {
 void DrawPlaceholderComponent(Vector2 position) {
     DrawRectangle(position.x, position.y, GRID_SIZE, GRID_SIZE, BLUE);
     DrawRectangleLines(position.x, position.y, GRID_SIZE, GRID_SIZE, DARKBLUE);
+}
+void DrawDebugInfo() {
+    Vector2 mousePosition = GetMousePosition();
+    Vector2 snappedPosition = SnapToGrid(mousePosition);
+    DrawText(TextFormat("Mouse Position: (%.0f, %.0f)", snappedPosition.x, snappedPosition.y), 10, 10, 20, DARKGRAY);
+    DrawText(TextFormat("Grid Position: (%d, %d)", (int)snappedPosition.x / GRID_SIZE, (int)snappedPosition.y / GRID_SIZE), 10, 40, 20, DARKGRAY);
+    DrawText(TextFormat("FPS: %d", GetFPS()), 10, 70, 20, DARKGRAY);
+    DrawText(TextFormat("Placing Component: %s", isPlacingComponent ? "Yes" : "No"), 10, 100, 20, DARKGRAY);
 }
