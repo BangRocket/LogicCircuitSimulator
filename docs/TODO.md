@@ -38,7 +38,7 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ---
 
 ### **5. Rendering System**
-   - [ ] Create a function to draw the grid on the screen.
+   - [x] Create a function to draw the grid on the screen.
    - [ ] Set up a placeholder function to draw components (e.g., gates, wires) in the future.
    - [ ] Add dynamic color changing for grid lines or cells to visualize component placement.
 
@@ -52,16 +52,16 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ---
 
 ### **7. Debugging Tools**
-   - [ ] Implement simple debug printouts (e.g., display mouse position on-screen).
+   - [x] Implement simple debug printouts (e.g., display mouse position on-screen).
    - [ ] Create a toggle for showing/hiding debug information.
    - [ ] Prepare for future debugging needs (circuit errors, signal flows).
 
 ---
 
 ### **8. Testing and Iteration**
-   - [ ] Test the core loop for stability (input, rendering, and frame rate consistency).
-   - [ ] Test grid snapping with different grid sizes.
-   - [ ] Test mouse input handling and ensure clicks/positions are correctly captured.
+   - [x] Test the core loop for stability (input, rendering, and frame rate consistency).
+   - [x] Test grid snapping with different grid sizes.
+   - [x] Test mouse input handling and ensure clicks/positions are correctly captured.
    - [ ] Ensure that the window can resize without breaking the grid system.
 
 ---
