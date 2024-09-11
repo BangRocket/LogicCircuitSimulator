@@ -2,6 +2,7 @@
 #include "../managers/ConnectionManager.h"
 #include "../core/Component.h"
 #include <cmath>
+#include <raymath.h>
 
 Wire::Wire(Component* start, int startPin, Component* end, int endPin)
     : startComponent(start), endComponent(end),
