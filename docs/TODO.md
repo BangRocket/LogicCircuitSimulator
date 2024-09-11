@@ -103,6 +103,8 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Update wire connections when components are rotated.
    - [ ] Implement wire routing algorithm to avoid overlapping with components.
    - [ ] Add visual feedback for invalid wire connections.
+   - [ ] Implement wire snapping to grid.
+   - [ ] Add ability to create curved or angled wires.
 
 ---
 
@@ -111,9 +113,11 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Extend logic simulation to OR gates.
    - [x] Implement logic simulation for NOT gates.
    - [x] Create a system for propagating signals through the circuit.
-   - [ ] Ensure logic simulation works correctly with rotated components.
+   - [x] Ensure logic simulation works correctly with rotated components.
    - [ ] Implement a clock system for synchronous logic (if needed).
    - [ ] Add support for multi-input gates (e.g., 3+ input AND/OR gates).
+   - [ ] Implement signal propagation delay simulation.
+   - [ ] Add support for floating inputs and high-impedance states.
 
 ---
 
@@ -128,6 +132,9 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Add UI element to show current rotation angle.
    - [ ] Implement a context menu for component actions (rotate, delete, etc.).
    - [ ] Add undo/redo functionality for user actions.
+   - [ ] Implement a zoom in/out feature for the circuit view.
+   - [ ] Add a mini-map for large circuits.
+   - [ ] Implement a search function to find components in complex circuits.
 
 ---
 
@@ -137,8 +144,10 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Create a step-by-step simulation mode for debugging circuits.
    - [ ] Add the ability to pause and resume the simulation.
    - [ ] Implement an output display component to show circuit results.
-   - [ ] Ensure circuit interaction works correctly with rotated components.
+   - [x] Ensure circuit interaction works correctly with rotated components.
    - [ ] Add a circuit reset functionality.
+   - [ ] Implement a circuit state save/load feature.
+   - [ ] Add a circuit validation tool to check for common errors.
 
 ---
 
@@ -149,6 +158,8 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Optimize rotation calculations and rendering.
    - [ ] Implement component instancing for improved rendering performance.
    - [ ] Profile and optimize critical paths in the simulation loop.
+   - [ ] Implement multi-threading for parallel simulation of independent circuit sections.
+   - [ ] Add level-of-detail rendering for zoomed-out views.
 
 ---
 
@@ -158,8 +169,11 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Implement NOR gate.
    - [ ] Implement D Flip-Flop for sequential logic.
    - [ ] Create a 7-segment display component for output visualization.
-   - [ ] Ensure all components work correctly with rotation.
+   - [x] Ensure all components work correctly with rotation.
    - [ ] Add customizable delay for components to simulate propagation delay.
+   - [ ] Implement multiplexer and demultiplexer components.
+   - [ ] Add counter components (e.g., binary counter, decade counter).
+   - [ ] Implement shift register components.
 
 ---
 
@@ -180,3 +194,7 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Implement a component search functionality.
    - [ ] Add a minimap for navigating large circuits.
    - [ ] Implement a circuit sharing system for users to exchange designs.
+   - [ ] Add a timing diagram view for signal analysis.
+   - [ ] Implement a circuit testing framework with automated test cases.
+   - [ ] Add support for analog components and mixed-signal simulation.
+   - [ ] Implement a plugin system for extending functionality.
