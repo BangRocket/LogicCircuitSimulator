@@ -3,9 +3,9 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ---
 
 ### **1. Project Setup**
-   - [ ] Create project directory structure: `src/`, `include/`, `build/`, `docs/`, `assets/`.
-   - [ ] Initialize a Git repository for version control.
-   - [ ] Set up the build system (Makefile, CMake, or your preferred system).
+   - [x] Create project directory structure: `src/`, `include/`, `build/`, `docs/`, `assets/`.
+   - [x] Initialize a Git repository for version control.
+   - [x] Set up the build system (Makefile, CMake, or your preferred system).
 
 ---
 
