@@ -21,6 +21,8 @@ public:
     int GetEndPinIndex() const { return endPinIndex; }
 
     void UpdateEndPosition(Vector2 newEndPos);
+    void UpdateConnectionsAfterRotation();
+    void RecalculateWirePath();
 
 private:
     Component* startComponent;

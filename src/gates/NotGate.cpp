@@ -15,17 +15,48 @@ void NotGate::Update() {
 }
 
 void NotGate::Draw() const {
-    Texture2D texture = ResourceManager::getInstance().getTexture("not_gate");
-    if (texture.id != 0) {
-        DrawTexture(texture, static_cast<int>(position.x), static_cast<int>(position.y), WHITE);
-    } else {
-        std::cerr << "Failed to get NOT gate texture for drawing" << std::endl;
-        // Fallback drawing if texture is not available
-        DrawRectangle(static_cast<int>(position.x), static_cast<int>(position.y), 100, 100, BLUE);
-    }
-    
-    // Call the base class Draw method to render pins
-    Component::DrawPins();
+	Vector2 scaledSize = GetScaledSize();
+	float scale = scaledSize.x / size.x;
+	Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
+
+    DrawTriangle(
+        {topLeft.x, topLeft.y},
+        {topLeft.x, topLeft.y + scaledSize.y},
+        {topLeft.x + scaledSize.x, topLeft.y + scaledSize.y / 2},
+        WHITE
+    );
+    DrawTriangleLines(
+        {topLeft.x, topLeft.y},
+        {topLeft.x, topLeft.y + scaledSize.y},
+        {topLeft.x + scaledSize.x, topLeft.y + scaledSize.y / 2},
+        BLACK
+    );
+
+    // Draw input pin
+    float pinRadius = 5 * scale;
+    DrawCircleV({topLeft.x, topLeft.y + scaledSize.y * 0.5f}, pinRadius, BLACK);
+
+    // Draw output pin
+    DrawCircleV({topLeft.x + scaledSize.x + pinRadius * 2, topLeft.y + scaledSize.y * 0.5f}, pinRadius, BLACK);
+
+    // Draw NOT text
+    int fontSize = static_cast<int>(20 * scale);
+    Vector2 textSize = MeasureTextEx(GetFontDefault(), "NOT", fontSize, 1);
+    Vector2 textPos = {
+        position.x - textSize.x / 2,
+        position.y - textSize.y / 2
+    };
+    DrawTextEx(GetFontDefault(), "NOT", textPos, fontSize, 1, BLACK);
+}
+
+bool NotGate::IsHovered(Vector2 mousePosition) {
+	Vector2 scaledSize = GetScaledSize();
+	Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
+    return CheckCollisionPointTriangle(mousePosition,
+        {topLeft.x, topLeft.y},
+        {topLeft.x, topLeft.y + scaledSize.y},
+        {topLeft.x + scaledSize.x, topLeft.y + scaledSize.y / 2}
+    );
 }
 
 Vector2 NotGate::GetInputPinPosition(int index) const {

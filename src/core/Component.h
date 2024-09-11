@@ -7,6 +7,7 @@
 
 class Wire;
 class ConnectionManager;
+class ComponentManager; // Forward declaration
 
 class Component {
 public:
@@ -35,12 +36,29 @@ public:
     int HoveredPin(Vector2 mousePosition) const;
 
     const std::string& GetTextureKey() const { return textureKey; }
+    Texture2D GetTexture() const;
 
     void SetHighlighted(bool highlight) { isHighlighted = highlight; }
     bool IsHighlighted() const { return isHighlighted; }
 
     Wire* GetWireAtPin(int pinIndex) const;
     bool CanConnectAtPin(int pinIndex) const;
+
+    void SetComponentManager(ComponentManager* manager) { componentManager = manager; }
+    void SetScale(float newScale);
+    float GetScale() const { return scale; }
+
+    Vector2 GetScaledSize() const;
+
+    void DrawPins() const;
+
+    // Rotation-related methods
+    void Rotate(float angle);
+    float GetRotation() const;
+    void SetRotation(float newRotation);
+
+    static const float PIN_RADIUS;
+    static const float PIN_HOVER_RADIUS;
 
 protected:
     Vector2 position;
@@ -50,12 +68,10 @@ protected:
     std::vector<bool> inputStates;
     std::vector<bool> outputStates;
     bool isHighlighted;
-
-    void DrawPins() const;
-
-    static const float PIN_RADIUS;
-    static const float PIN_HOVER_RADIUS;
-
+    Vector2 size = {50, 50}; // Default size for all components
+    ComponentManager* componentManager;
+    float scale = 1.0f;
+    float rotation = 0.0f;
     friend class ConnectionManager;
 };
 

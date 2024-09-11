@@ -44,6 +44,8 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Implement a basic camera system for panning and zooming the grid.
    - [x] Add a function to highlight the grid cell under the mouse cursor.
    - [x] Implement a function to draw placeholder components on the grid.
+   - [x] Implement component rotation in rendering.
+   - [x] Implement texture handling for components.
 
 ---
 
@@ -58,6 +60,7 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ### **7. Debugging Tools**
    - [x] Implement simple debug printouts (e.g., display mouse position on-screen).
    - [x] Create a toggle for showing/hiding debug information.
+   - [x] Add debug information for component rotation.
    - [ ] Prepare for future debugging needs (circuit errors, signal flows).
 
 ---
@@ -66,9 +69,12 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Test the core loop for stability (input, rendering, and frame rate consistency).
    - [x] Test grid snapping with different grid sizes.
    - [x] Test mouse input handling and ensure clicks/positions are correctly captured.
-   - [ ] Ensure that the window can resize without breaking the grid system.
    - [x] Test the dynamic color changing of grid cells for responsiveness and visual clarity.
-   - [ ] Test the camera system for smooth panning and zooming.
+   - [x] Test the camera system for smooth panning and zooming.
+   - [x] Test component rotation functionality thoroughly.
+   - [x] Test wire connections after component rotation.
+   - [ ] Ensure that the window can resize without breaking the grid system.
+   - [ ] Test texture rendering for all component types.
 
 ---
 
@@ -82,6 +88,10 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Implement a way to switch between different component types when placing.
    - [x] Add input and output pins to components for wire connections.
    - [x] Implement a system for connecting components' input and output pins.
+   - [x] Add rotation property to Component class.
+   - [x] Implement component rotation functionality.
+   - [x] Implement component scaling functionality.
+   - [x] Add texture handling to Component class.
 
 ---
 
@@ -90,6 +100,9 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Create a system for drawing wires between components.
    - [x] Implement wire placement and removal functionality.
    - [x] Ensure proper signal propagation through wires.
+   - [x] Update wire connections when components are rotated.
+   - [ ] Implement wire routing algorithm to avoid overlapping with components.
+   - [ ] Add visual feedback for invalid wire connections.
 
 ---
 
@@ -98,7 +111,9 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Extend logic simulation to OR gates.
    - [x] Implement logic simulation for NOT gates.
    - [x] Create a system for propagating signals through the circuit.
+   - [ ] Ensure logic simulation works correctly with rotated components.
    - [ ] Implement a clock system for synchronous logic (if needed).
+   - [ ] Add support for multi-input gates (e.g., 3+ input AND/OR gates).
 
 ---
 
@@ -106,9 +121,13 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Add a toolbar or menu for selecting different component types.
    - [x] Implement a status bar showing current mode (e.g., placing component, connecting wires).
    - [x] Add visual feedback when hovering over components or pins.
-   - [ ] Implement a way to rotate components.
+   - [x] Implement a way to rotate components.
+   - [x] Implement keyboard shortcuts for rotation (e.g., 'R' to rotate 90 degrees clockwise).
    - [ ] Add a way to delete wires.
    - [ ] Implement component dragging and repositioning.
+   - [ ] Add UI element to show current rotation angle.
+   - [ ] Implement a context menu for component actions (rotate, delete, etc.).
+   - [ ] Add undo/redo functionality for user actions.
 
 ---
 
@@ -118,6 +137,8 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Create a step-by-step simulation mode for debugging circuits.
    - [ ] Add the ability to pause and resume the simulation.
    - [ ] Implement an output display component to show circuit results.
+   - [ ] Ensure circuit interaction works correctly with rotated components.
+   - [ ] Add a circuit reset functionality.
 
 ---
 
@@ -125,6 +146,9 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Implement efficient data structures for storing and updating circuit state.
    - [ ] Optimize rendering for large circuits.
    - [ ] Implement culling for off-screen components and wires.
+   - [ ] Optimize rotation calculations and rendering.
+   - [ ] Implement component instancing for improved rendering performance.
+   - [ ] Profile and optimize critical paths in the simulation loop.
 
 ---
 
@@ -134,6 +158,8 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Implement NOR gate.
    - [ ] Implement D Flip-Flop for sequential logic.
    - [ ] Create a 7-segment display component for output visualization.
+   - [ ] Ensure all components work correctly with rotation.
+   - [ ] Add customizable delay for components to simulate propagation delay.
 
 ---
 
@@ -150,3 +176,7 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [ ] Implement export functionality (e.g., to VHDL or Verilog).
    - [ ] Add support for custom component creation.
    - [ ] Implement a simulation speed control feature.
+   - [ ] Add advanced rotation features (e.g., arbitrary angles, mirroring).
+   - [ ] Implement a component search functionality.
+   - [ ] Add a minimap for navigating large circuits.
+   - [ ] Implement a circuit sharing system for users to exchange designs.

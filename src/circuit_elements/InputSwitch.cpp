@@ -13,30 +13,37 @@ void InputSwitch::Update() {
 }
 
 void InputSwitch::Draw() const {
-    Vector2 pos = GetPosition();
+	Vector2 scaledSize = GetScaledSize();
+	float scale = scaledSize.x / size.x;
+	Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
+
+    DrawRectangleV(topLeft, scaledSize, WHITE);
+    DrawRectangleLinesEx({topLeft.x, topLeft.y, scaledSize.x, scaledSize.y}, 2 * scale, BLACK);
+
+    // Draw output pin
+    float pinRadius = 5 * scale;
+    DrawCircleV({topLeft.x + scaledSize.x, topLeft.y + scaledSize.y * 0.5f}, pinRadius, BLACK);
+
+    // Draw switch state
     Color switchColor = state ? GREEN : RED;
-    Color tint = IsHighlighted() ? YELLOW : WHITE;
+    DrawRectangle(topLeft.x + scaledSize.x * 0.25f, topLeft.y + scaledSize.y * 0.25f,
+                  scaledSize.x * 0.5f, scaledSize.y * 0.5f, switchColor);
 
-    // Draw the switch base
-    DrawCircle(pos.x + SWITCH_RADIUS, pos.y + SWITCH_RADIUS, SWITCH_RADIUS, LIGHTGRAY);
+    // Draw INPUT text
+    int fontSize = static_cast<int>(16 * scale);
+    Vector2 textSize = MeasureTextEx(GetFontDefault(), "INPUT", fontSize, 1);
+    Vector2 textPos = {
+        position.x - textSize.x / 2,
+        topLeft.y + scaledSize.y + 5 * scale
+    };
+    DrawTextEx(GetFontDefault(), "INPUT", textPos, fontSize, 1, BLACK);
+}
 
-    // Draw the switch state
-    DrawCircle(pos.x + SWITCH_RADIUS, pos.y + SWITCH_RADIUS, SWITCH_RADIUS * 0.8f, switchColor);
-
-    // Draw the component texture
-    DrawTextureV(ResourceManager::getInstance().getTexture(GetTextureKey()), pos, tint);
-
-    // Draw the output pin
-    Vector2 pinPos = GetOutputPinPosition(0);
-    DrawCircle(pinPos.x, pinPos.y, PIN_RADIUS, outputStates[0] ? RED : BLACK);
-
-    // Draw highlight if necessary
-    if (IsHighlighted()) {
-        DrawCircleLines(pos.x + SWITCH_RADIUS, pos.y + SWITCH_RADIUS, SWITCH_RADIUS + 2, YELLOW);
-    }
-    
-    // Debug information
-    DrawText(TextFormat("InputSwitch at (%.1f, %.1f)", pos.x, pos.y), pos.x, pos.y - 20, 10, BLACK);
+bool InputSwitch::IsHovered(Vector2 mousePosition) {
+	Vector2 scaledSize = GetScaledSize();
+	float scale = scaledSize.x / size.x;
+	Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
+    return CheckCollisionPointRec(mousePosition, {topLeft.x, topLeft.y, scaledSize.x, scaledSize.y});
 }
 
 void InputSwitch::ToggleState() {

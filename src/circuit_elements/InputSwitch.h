@@ -8,9 +8,10 @@ public:
     InputSwitch(Vector2 position);
     void Update() override;
     void Draw() const override;
-    void ToggleState();
+	bool IsHovered(Vector2 mousePosition);
+	void ToggleState();
 
-    Vector2 GetOutputPinPosition(int index) const override;
+	Vector2 GetOutputPinPosition(int index) const override;
 
 private:
     bool state;
