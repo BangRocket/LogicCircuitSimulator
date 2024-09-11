@@ -1,0 +1,8 @@
+{
+    "C_Cpp.default.compilerPath": "cl.exe",
+    "files.associations": {
+        "*.py": "python",
+        "format": "cpp",
+        "vector": "cpp"
+    }
+}

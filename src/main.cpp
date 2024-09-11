@@ -7,6 +7,7 @@
 #include "utils/ResourceManager.h"
 #include <iostream>
 #include <vector>
+#include <xutility>
 
 // Constants
 const int SCREEN_WIDTH = 800;
@@ -33,10 +34,10 @@ void HandleInput();
 void Update();
 void Render();
 void DrawGrid();
-Vector2 SnapToGrid(Vector2 position);
+[[nodiscard]] Vector2 SnapToGrid(Vector2 position);
 void DrawDebugInfo();
-Component* GetComponentAtPosition(Vector2 position);
-int GetPinAtPosition(Component* component, Vector2 position);
+[[nodiscard]] Component* GetComponentAtPosition(Vector2 position);
+[[nodiscard]] int GetPinAtPosition(Component* component, Vector2 position);
 
 // Global variables
 ProgramState currentState = ProgramState::IDLE;
@@ -48,7 +49,7 @@ int wireStartPin = -1;
 Vector2 wireEndPos = {0, 0};
 bool showDebugInfo = true;
 
-// New InputSwitch class
+// Updated InputSwitch class
 class InputSwitch : public Component {
 public:
     InputSwitch(Vector2 position) : Component(position, "input_switch", 0, 1), state(false) {}
@@ -58,8 +59,8 @@ public:
     }
 
     void Draw() const override {
-        Component::Draw();
-        DrawRectangle(position.x + 16, position.y + 16, 32, 32, state ? GREEN : RED);
+        Color tint = state ? GREEN : RED;
+        DrawTexture(ResourceManager::getInstance().getTexture("input_switch"), position.x, position.y, tint);
     }
 
     void ToggleState() {
@@ -73,6 +74,12 @@ private:
 int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Logic Circuit Simulator");
     SetTargetFPS(60);
+
+    // Load textures
+    ResourceManager::getInstance().loadSVGTexture("and_gate", "assets/and_gate.svg", 64, 64);
+    ResourceManager::getInstance().loadSVGTexture("or_gate", "assets/or_gate.svg", 64, 64);
+    ResourceManager::getInstance().loadSVGTexture("not_gate", "assets/not_gate.svg", 64, 64);
+    ResourceManager::getInstance().loadSVGTexture("input_switch", "assets/input_switch.svg", 64, 64);
 
     while (!WindowShouldClose()) {
         HandleInput();
@@ -243,7 +250,7 @@ void DrawGrid() {
     }
 }
 
-Vector2 SnapToGrid(Vector2 position) {
+[[nodiscard]] Vector2 SnapToGrid(Vector2 position) {
     return {
         float(int(position.x / GRID_SIZE) * GRID_SIZE),
         float(int(position.y / GRID_SIZE) * GRID_SIZE)
@@ -252,8 +259,8 @@ Vector2 SnapToGrid(Vector2 position) {
 
 void DrawDebugInfo() {
     DrawText(TextFormat("FPS: %d", GetFPS()), 10, 10, 20, DARKGRAY);
-    DrawText(TextFormat("Components: %d", (int)components.size()), 10, 40, 20, DARKGRAY);
-    DrawText(TextFormat("Wires: %d", (int)wires.size()), 10, 70, 20, DARKGRAY);
+    DrawText(TextFormat("Components: %zd", std::ssize(components)), 10, 40, 20, DARKGRAY);
+    DrawText(TextFormat("Wires: %zd", std::ssize(wires)), 10, 70, 20, DARKGRAY);
     DrawText(TextFormat("State: %s", 
         currentState == ProgramState::IDLE ? "IDLE" :
         currentState == ProgramState::PLACING_COMPONENT ? "PLACING" : "CONNECTING"), 10, 100, 20, DARKGRAY);
@@ -263,7 +270,7 @@ void DrawDebugInfo() {
         currentComponentType == ComponentType::NOT ? "NOT" : "INPUT"), 10, 130, 20, DARKGRAY);
 }
 
-Component* GetComponentAtPosition(Vector2 position) {
+[[nodiscard]] Component* GetComponentAtPosition(Vector2 position) {
     for (auto& component : components) {
         Vector2 compPos = component->GetPosition();
         if (position.x >= compPos.x && position.x < compPos.x + 64 &&
@@ -274,7 +281,7 @@ Component* GetComponentAtPosition(Vector2 position) {
     return nullptr;
 }
 
-int GetPinAtPosition(Component* component, Vector2 position) {
+[[nodiscard]] int GetPinAtPosition(Component* component, Vector2 position) {
     if (!component) return -1;
 
     for (int i = 0; i < component->GetNumInputs() + component->GetNumOutputs(); ++i) {

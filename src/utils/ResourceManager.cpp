@@ -50,8 +50,8 @@ void ResourceManager::loadSVGTexture(const std::string& name, const std::string&
         .data = pixels.data(),
         .width = width,
         .height = height,
-        .format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8,
-        .mipmaps = 1
+        .mipmaps = 1,
+        .format = PIXELFORMAT_UNCOMPRESSED_R8G8B8A8        
     };
 
     std::cout << "Image created with dimensions: " << img.width << "x" << img.height << std::endl;
