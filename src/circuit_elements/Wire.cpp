@@ -1,4 +1,5 @@
 #include "Wire.h"
+#include "../managers/ConnectionManager.h"
 #include "../core/Component.h"
 #include <cmath>
 
@@ -10,6 +11,11 @@ Wire::Wire(Component* start, int startPin, Component* end, int endPin)
     CalculateWirePoints();
 }
 
+Wire::~Wire()
+{
+    // The ConnectionManager is responsible for removing the wire from its list
+}
+
 void Wire::Update()
 {
     // Update the wire's signal state based on the start component's output
@@ -17,6 +23,9 @@ void Wire::Update()
     
     // Propagate the signal to the end component
     endComponent->SetInputState(endPinIndex, signalState);
+
+    // Recalculate wire points in case components have moved
+    CalculateWirePoints();
 }
 
 void Wire::Draw() const
@@ -48,4 +57,11 @@ void Wire::CalculateWirePoints()
     points.push_back({midPoint.x, endPos.y});
 
     points.push_back(endPos);
+}
+
+void Wire::UpdateEndPosition(Vector2 newEndPos)
+{
+    // This method is now only used for temporary wires during dragging
+    points.back() = newEndPos;
+    CalculateWirePoints();
 }

@@ -41,7 +41,7 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Create a function to draw the grid on the screen.
    - [x] Set up a placeholder function to draw components (e.g., gates, wires) in the future.
    - [x] Add dynamic color changing for grid lines or cells to visualize component placement.
-   - [ ] Implement a basic camera system for panning and zooming the grid.
+   - [x] Implement a basic camera system for panning and zooming the grid.
    - [x] Add a function to highlight the grid cell under the mouse cursor.
    - [x] Implement a function to draw placeholder components on the grid.
 
@@ -103,9 +103,9 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ---
 
 ### **12. User Interface Improvements**
-   - [ ] Add a toolbar or menu for selecting different component types.
+   - [x] Add a toolbar or menu for selecting different component types.
    - [x] Implement a status bar showing current mode (e.g., placing component, connecting wires).
-   - [ ] Add visual feedback when hovering over components or pins.
+   - [x] Add visual feedback when hovering over components or pins.
    - [ ] Implement a way to rotate components.
    - [ ] Add a way to delete wires.
    - [ ] Implement component dragging and repositioning.

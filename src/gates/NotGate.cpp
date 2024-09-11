@@ -1,5 +1,5 @@
 #include "NotGate.h"
-#include "../utils/ResourceManager.h"
+#include "../managers/ResourceManager.h"
 #include <iostream>
 
 NotGate::NotGate(Vector2 position) : Component(position, "not_gate", 1, 1) {

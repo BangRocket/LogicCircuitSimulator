@@ -5,10 +5,13 @@
 #include <vector>
 
 class Component;
+class ConnectionManager;
 
 class Wire {
 public:
     Wire(Component* startComponent, int startPinIndex, Component* endComponent, int endPinIndex);
+    ~Wire();
+
     void Update();
     void Draw() const;
     
@@ -16,6 +19,8 @@ public:
     Component* GetEndComponent() const { return endComponent; }
     int GetStartPinIndex() const { return startPinIndex; }
     int GetEndPinIndex() const { return endPinIndex; }
+
+    void UpdateEndPosition(Vector2 newEndPos);
 
 private:
     Component* startComponent;
@@ -26,6 +31,8 @@ private:
     bool signalState;
 
     void CalculateWirePoints();
+
+    friend class ConnectionManager;
 };
 
 #endif // WIRE_H

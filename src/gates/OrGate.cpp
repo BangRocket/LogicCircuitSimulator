@@ -1,5 +1,5 @@
 #include "OrGate.h"
-#include "../utils/ResourceManager.h"
+#include "../managers/ResourceManager.h"
 #include <iostream>
 
 OrGate::OrGate(Vector2 position) : Component(position, "or_gate", 2, 1) {
