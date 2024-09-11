@@ -41,31 +41,23 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Create a function to draw the grid on the screen.
    - [x] Set up a placeholder function to draw components (e.g., gates, wires) in the future.
    - [x] Add dynamic color changing for grid lines or cells to visualize component placement.
-   - [x] Implement a basic camera system for panning and zooming the grid.
+   - [ ] Implement a basic camera system for panning and zooming the grid.
    - [x] Add a function to highlight the grid cell under the mouse cursor.
-   - [ ] Implement a function to draw placeholder components on the grid.
-
-### **8. Testing and Iteration**
-   - [x] Test the core loop for stability (input, rendering, and frame rate consistency).
-   - [x] Test grid snapping with different grid sizes.
-   - [x] Test mouse input handling and ensure clicks/positions are correctly captured.
-   - [ ] Ensure that the window can resize without breaking the grid system.
-   - [ ] Test the dynamic color changing of grid cells for responsiveness and visual clarity.
-   - [ ] Test the camera system for smooth panning and zooming.
+   - [x] Implement a function to draw placeholder components on the grid.
 
 ---
 
 ### **6. Resource Management**
    - [x] Implement a basic resource loader.
    - [x] Load placeholder textures (or draw shapes) for gates and components.
-   - [ ] Set up a system to easily add and manage textures/sprites for future components.
-   - [ ] Implement a resource cleanup function to free memory when closing the application.
+   - [x] Set up a system to easily add and manage textures/sprites for future components.
+   - [x] Implement a resource cleanup function to free memory when closing the application.
 
 ---
 
 ### **7. Debugging Tools**
    - [x] Implement simple debug printouts (e.g., display mouse position on-screen).
-   - [ ] Create a toggle for showing/hiding debug information.
+   - [x] Create a toggle for showing/hiding debug information.
    - [ ] Prepare for future debugging needs (circuit errors, signal flows).
 
 ---
@@ -75,15 +67,86 @@ Here's a detailed **To-Do List** to guide you through the process of building th
    - [x] Test grid snapping with different grid sizes.
    - [x] Test mouse input handling and ensure clicks/positions are correctly captured.
    - [ ] Ensure that the window can resize without breaking the grid system.
+   - [x] Test the dynamic color changing of grid cells for responsiveness and visual clarity.
+   - [ ] Test the camera system for smooth panning and zooming.
+
+---
+
+### **9. Component System**
+   - [x] Implement a basic Component class with position and texture.
+   - [x] Create a system for placing and removing components on the grid.
+   - [x] Implement AND gate as a derived class from Component.
+   - [x] Implement OR gate as a derived class from Component.
+   - [x] Implement NOT gate as a derived class from Component.
+   - [x] Implement Input Switch as a derived class from Component.
+   - [x] Implement a way to switch between different component types when placing.
+   - [x] Add input and output pins to components for wire connections.
+   - [x] Implement a system for connecting components' input and output pins.
+
+---
+
+### **10. Wire System**
+   - [x] Implement a Wire class to connect component pins.
+   - [x] Create a system for drawing wires between components.
+   - [x] Implement wire placement and removal functionality.
+   - [x] Ensure proper signal propagation through wires.
+
+---
+
+### **11. Logic Simulation**
+   - [x] Implement basic logic simulation for AND gates.
+   - [x] Extend logic simulation to OR gates.
+   - [x] Implement logic simulation for NOT gates.
+   - [x] Create a system for propagating signals through the circuit.
+   - [ ] Implement a clock system for synchronous logic (if needed).
+
+---
+
+### **12. User Interface Improvements**
+   - [ ] Add a toolbar or menu for selecting different component types.
+   - [x] Implement a status bar showing current mode (e.g., placing component, connecting wires).
+   - [ ] Add visual feedback when hovering over components or pins.
+   - [ ] Implement a way to rotate components.
+   - [ ] Add a way to delete wires.
+   - [ ] Implement component dragging and repositioning.
+
+---
+
+### **13. Circuit Interaction**
+   - [x] Implement a way to set input values for circuit testing (Input Switch).
+   - [x] Add visual representation of signal states (high/low) on wires and component pins.
+   - [ ] Create a step-by-step simulation mode for debugging circuits.
+   - [ ] Add the ability to pause and resume the simulation.
+   - [ ] Implement an output display component to show circuit results.
+
+---
+
+### **14. Performance Optimization**
+   - [ ] Implement efficient data structures for storing and updating circuit state.
+   - [ ] Optimize rendering for large circuits.
+   - [ ] Implement culling for off-screen components and wires.
+
+---
+
+### **15. Additional Components**
+   - [ ] Implement XOR gate.
+   - [ ] Implement NAND gate.
+   - [ ] Implement NOR gate.
+   - [ ] Implement D Flip-Flop for sequential logic.
+   - [ ] Create a 7-segment display component for output visualization.
 
 ---
 
 ### **Future Steps (Post Base Engine)**
-   - [ ] Begin adding basic components (logic gates, wires).
-   - [ ] Implement basic logic simulation (signal propagation, gate behavior).
    - [ ] Design and implement the UI for component selection, control panel, etc.
+   - [ ] Add more complex logic components (e.g., multiplexers, decoders).
+   - [ ] Implement subcircuits or hierarchical designs.
    - [ ] Add task/challenge systems and sandbox mode.
    - [ ] Implement a save/load system for circuits.
    - [ ] Add an undo/redo system for user actions.
    - [ ] Create a basic tutorial system to guide new users.
    - [ ] Implement a circuit validation system to check for errors.
+   - [ ] Add performance optimizations for large circuits.
+   - [ ] Implement export functionality (e.g., to VHDL or Verilog).
+   - [ ] Add support for custom component creation.
+   - [ ] Implement a simulation speed control feature.
