@@ -25,14 +25,10 @@ void Component::Draw() const
     DrawPins();
 
     if (isHighlighted) {
-        DrawRectanglePro(dest, origin, rotation, YELLOW);
+        DrawRectangleLinesEx(dest, 2, YELLOW);
     }
 }
 
-Vector2 Component::GetScaledSize() const
-{
-    return { size.x * scale, size.y * scale };
-}
 
 Vector2 Component::GetInputPinPosition(int index) const
 {
@@ -99,13 +95,13 @@ void Component::DrawPins() const
     for (int i = 0; i < numInputs; ++i)
     {
         Vector2 pinPos = GetInputPinPosition(i);
-        DrawCircle(pinPos.x, pinPos.y, PIN_RADIUS * scale, inputStates[i] ? RED : BLACK);
+        DrawCircleV(pinPos, PIN_RADIUS * scale, inputStates[i] ? RED : BLACK);
     }
 
     for (int i = 0; i < numOutputs; ++i)
     {
         Vector2 pinPos = GetOutputPinPosition(i);
-        DrawCircle(pinPos.x, pinPos.y, PIN_RADIUS * scale, outputStates[i] ? RED : BLACK);
+        DrawCircleV(pinPos, PIN_RADIUS * scale, outputStates[i] ? RED : BLACK);
     }
 }
 

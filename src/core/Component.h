@@ -48,7 +48,7 @@ public:
     void SetScale(float newScale);
     float GetScale() const { return scale; }
 
-    Vector2 GetScaledSize() const;
+    Vector2 GetScaledSize() const { return {size.x * scale, size.y * scale}; }
 
     void DrawPins() const;
 

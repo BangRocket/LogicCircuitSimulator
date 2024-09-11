@@ -199,6 +199,14 @@ void Renderer::DrawRotatedComponent(const Component* component) {
                    origin,
                    rotation,
                    WHITE);
+    
+    // Draw pins
+    component->DrawPins();
+    
+    // Draw highlight if necessary
+    if (component->IsHighlighted()) {
+        DrawRectangleLinesEx(destRec, 2, YELLOW);
+    }
 }
 
 void Renderer::DrawRotatedRectangleLinesEx(Rectangle rec, float rotation, float lineThick, Color color) {

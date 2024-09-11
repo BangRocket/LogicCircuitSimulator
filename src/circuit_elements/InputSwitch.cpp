@@ -13,16 +13,15 @@ void InputSwitch::Update() {
 }
 
 void InputSwitch::Draw() const {
-	Vector2 scaledSize = GetScaledSize();
-	float scale = scaledSize.x / size.x;
-	Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
+    Vector2 scaledSize = GetScaledSize();
+    Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
 
     DrawRectangleV(topLeft, scaledSize, WHITE);
     DrawRectangleLinesEx({topLeft.x, topLeft.y, scaledSize.x, scaledSize.y}, 2 * scale, BLACK);
 
     // Draw output pin
-    float pinRadius = 5 * scale;
-    DrawCircleV({topLeft.x + scaledSize.x, topLeft.y + scaledSize.y * 0.5f}, pinRadius, BLACK);
+    Vector2 pinPos = GetOutputPinPosition(0);
+    DrawCircleV(pinPos, PIN_RADIUS * scale, BLACK);
 
     // Draw switch state
     Color switchColor = state ? GREEN : RED;
