@@ -17,7 +17,22 @@ FetchContent_Declare(
 FetchContent_MakeAvailable(raylib)
 
 # Add source files
-add_executable(${PROJECT_NAME} src/main.cpp)
+file(GLOB_RECURSE SOURCE_FILES 
+    ${CMAKE_SOURCE_DIR}/src/*.cpp
+    ${CMAKE_SOURCE_DIR}/src/*.h
+)
+
+add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+
+# Include directories
+target_include_directories(${PROJECT_NAME} PRIVATE ${CMAKE_SOURCE_DIR}/src)
 
 # Link raylib
 target_link_libraries(${PROJECT_NAME} raylib)
+
+# macOS specific settings
+if(APPLE)
+    target_link_libraries(${PROJECT_NAME} "-framework IOKit")
+    target_link_libraries(${PROJECT_NAME} "-framework Cocoa")
+    target_link_libraries(${PROJECT_NAME} "-framework OpenGL")
+endif()
