@@ -1,5 +1,7 @@
 #include "raylib.h"
+#include "Component.h"
 #include <iostream>
+#include <vector>
 
 // Constants
 const int SCREEN_WIDTH = 800;
@@ -19,6 +21,7 @@ void DrawDebugInfo();
 bool isPlacingComponent = false;
 Vector2 componentPosition = {0, 0};
 bool showDebugInfo = true;
+std::vector<Component*> components;
 
 int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Logic Circuit Simulator");
@@ -40,10 +43,24 @@ void HandleInput() {
     
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         if (isPlacingComponent) {
+            // Place the component
+            Component* newComponent = new Component(snappedPosition);
+            components.push_back(newComponent);
             isPlacingComponent = false;
         } else {
             isPlacingComponent = true;
             componentPosition = snappedPosition;
+        }
+    }
+
+    if (IsMouseButtonPressed(MOUSE_RIGHT_BUTTON)) {
+        // Remove component if clicked on one
+        for (auto it = components.begin(); it != components.end(); ++it) {
+            if ((*it)->GetPosition().x == snappedPosition.x && (*it)->GetPosition().y == snappedPosition.y) {
+                delete *it;
+                components.erase(it);
+                break;
+            }
         }
     }
 
@@ -77,6 +94,11 @@ void Render() {
     ClearBackground(RAYWHITE);
     
     DrawGrid();
+    
+    // Draw all placed components
+    for (const auto& component : components) {
+        component->Draw();
+    }
     
     if (isPlacingComponent) {
         DrawPlaceholderComponent(componentPosition);
