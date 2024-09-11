@@ -12,6 +12,11 @@ void Update();
 void Render();
 void DrawGrid();
 Vector2 SnapToGrid(Vector2 position);
+void DrawPlaceholderComponent(Vector2 position);
+
+// Global variables
+bool isPlacingComponent = false;
+Vector2 componentPosition = {0, 0};
 
 int main() {
     InitWindow(SCREEN_WIDTH, SCREEN_HEIGHT, "Logic Circuit Simulator");
@@ -33,6 +38,13 @@ void HandleInput() {
     
     if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
         std::cout << "Left mouse button clicked at: (" << snappedPosition.x << ", " << snappedPosition.y << ")" << std::endl;
+        if (isPlacingComponent) {
+            isPlacingComponent = false;
+            std::cout << "Component placed at: (" << componentPosition.x << ", " << componentPosition.y << ")" << std::endl;
+        } else {
+            isPlacingComponent = true;
+            componentPosition = snappedPosition;
+        }
     }
 
     if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
@@ -46,6 +58,10 @@ void HandleInput() {
     if (IsKeyPressed(KEY_R)) {
         std::cout << "Redo shortcut pressed" << std::endl;
     }
+
+    if (isPlacingComponent) {
+        componentPosition = snappedPosition;
+    }
 }
 
 void Update() {
@@ -57,6 +73,10 @@ void Render() {
     ClearBackground(RAYWHITE);
     
     DrawGrid();
+    
+    if (isPlacingComponent) {
+        DrawPlaceholderComponent(componentPosition);
+    }
     
     DrawText("Logic Circuit Simulator", 190, 200, 20, LIGHTGRAY);
     
@@ -81,4 +101,9 @@ Vector2 SnapToGrid(Vector2 position) {
         float(int(position.x / GRID_SIZE) * GRID_SIZE),
         float(int(position.y / GRID_SIZE) * GRID_SIZE)
     };
+}
+
+void DrawPlaceholderComponent(Vector2 position) {
+    DrawRectangle(position.x, position.y, GRID_SIZE, GRID_SIZE, BLUE);
+    DrawRectangleLines(position.x, position.y, GRID_SIZE, GRID_SIZE, DARKBLUE);
 }
