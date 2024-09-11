@@ -30,9 +30,9 @@ Here's a detailed **To-Do List** to guide you through the process of building th
 ---
 
 ### **4. Grid System**
-   - [ ] Define a grid size (e.g., 32x32 pixels per cell).
-   - [ ] Implement grid snapping (convert screen coordinates to grid coordinates).
-   - [ ] Create a basic grid-drawing function using raylib’s `DrawLine()`.
+   - [x] Define a grid size (e.g., 32x32 pixels per cell).
+   - [x] Implement grid snapping (convert screen coordinates to grid coordinates).
+   - [x] Create a basic grid-drawing function using raylib's `DrawLine()`.
    - [ ] Ensure components will snap to the grid for placement.
 
 ---
