@@ -20,7 +20,7 @@ void AndGate::Draw() const {
     Vector2 scaledSize = GetScaledSize();
     Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
     Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
-    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };
+    Vector2 origin = { scaledSize.x, scaledSize.y};
     DrawTexturePro(texture, source, dest, origin, rotation, tint);
     DrawPins();
 
