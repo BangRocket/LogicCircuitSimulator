@@ -28,13 +28,13 @@ void Component::DrawDebugFrames() const
     DrawRectangleLinesEx(componentRect, 2, GREEN);
 
     // Draw a small box to represent the origin
-    float originBoxSize = 4 * scale;
+    float originBoxSize = 8 * scale;  // Increased size for better visibility
     DrawRectangle(
         position.x - originBoxSize / 2,
         position.y - originBoxSize / 2,
         originBoxSize,
         originBoxSize,
-        YELLOW
+        ORANGE
     );
 
     for (int i = 0; i < numInputs; ++i)
