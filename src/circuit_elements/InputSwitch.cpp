@@ -13,29 +13,23 @@ void InputSwitch::Update() {
 }
 
 void InputSwitch::Draw() const {
+    Texture2D texture = GetTexture();
+    Color tint = isHighlighted ? YELLOW : WHITE;
     Vector2 scaledSize = GetScaledSize();
-    Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
+    Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
+    Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
+    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };
+    DrawTexturePro(texture, source, dest, origin, rotation, tint);
+    DrawPins();
 
-    DrawRectangleV(topLeft, scaledSize, WHITE);
-    DrawRectangleLinesEx({topLeft.x, topLeft.y, scaledSize.x, scaledSize.y}, 2 * scale, BLACK);
-
-    // Draw output pin
-    Vector2 pinPos = GetOutputPinPosition(0);
-    DrawCircleV(pinPos, PIN_RADIUS * scale, BLACK);
+    if (isHighlighted) {
+        DrawRectangleLinesEx(dest, 2, YELLOW);
+    }
 
     // Draw switch state
     Color switchColor = state ? GREEN : RED;
-    DrawRectangle(topLeft.x + scaledSize.x * 0.25f, topLeft.y + scaledSize.y * 0.25f,
-                  scaledSize.x * 0.5f, scaledSize.y * 0.5f, switchColor);
-
-    // Draw INPUT text
-    int fontSize = static_cast<int>(16 * scale);
-    Vector2 textSize = MeasureTextEx(GetFontDefault(), "INPUT", fontSize, 1);
-    Vector2 textPos = {
-        position.x - textSize.x / 2,
-        topLeft.y + scaledSize.y + 5 * scale
-    };
-    DrawTextEx(GetFontDefault(), "INPUT", textPos, fontSize, 1, BLACK);
+    Vector2 switchPos = { position.x, position.y };
+    DrawCircleV(switchPos, SWITCH_RADIUS * scale, switchColor);
 }
 
 bool InputSwitch::IsHovered(Vector2 mousePosition) {

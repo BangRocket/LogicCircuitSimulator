@@ -186,27 +186,7 @@ int Renderer::GetToolbarHeight() const {
 }
 
 void Renderer::DrawRotatedComponent(const Component* component) {
-    Vector2 position = component->GetPosition();
-    Vector2 size = component->GetScaledSize();
-    float rotation = component->GetRotation();
-    
-    Rectangle destRec = { position.x, position.y, size.x, size.y };
-    Vector2 origin = { size.x / 2, size.y / 2 };
-    
-    DrawTexturePro(component->GetTexture(),
-                   Rectangle{ 0, 0, (float)component->GetTexture().width, (float)component->GetTexture().height },
-                   destRec,
-                   origin,
-                   rotation,
-                   WHITE);
-    
-    // Draw pins
-    component->DrawPins();
-    
-    // Draw highlight if necessary
-    if (component->IsHighlighted()) {
-        DrawRectangleLinesEx(destRec, 2, YELLOW);
-    }
+    component->Draw();
 }
 
 void Renderer::DrawRotatedRectangleLinesEx(Rectangle rec, float rotation, float lineThick, Color color) {

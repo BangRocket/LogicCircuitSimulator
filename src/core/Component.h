@@ -15,7 +15,7 @@ public:
     virtual ~Component() = default;
 
     virtual void Update() = 0;
-    virtual void Draw() const;
+    virtual void Draw() const = 0;
 
     Vector2 GetPosition() const { return position; }
     void SetPosition(Vector2 newPosition) { position = newPosition; }

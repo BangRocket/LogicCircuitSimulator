@@ -15,38 +15,18 @@ void NotGate::Update() {
 }
 
 void NotGate::Draw() const {
-	Vector2 scaledSize = GetScaledSize();
-	float scale = scaledSize.x / size.x;
-	Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
+    Texture2D texture = GetTexture();
+    Color tint = isHighlighted ? YELLOW : WHITE;
+    Vector2 scaledSize = GetScaledSize();
+    Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
+    Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
+    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };
+    DrawTexturePro(texture, source, dest, origin, rotation, tint);
+    DrawPins();
 
-    DrawTriangle(
-        {topLeft.x, topLeft.y},
-        {topLeft.x, topLeft.y + scaledSize.y},
-        {topLeft.x + scaledSize.x, topLeft.y + scaledSize.y / 2},
-        WHITE
-    );
-    DrawTriangleLines(
-        {topLeft.x, topLeft.y},
-        {topLeft.x, topLeft.y + scaledSize.y},
-        {topLeft.x + scaledSize.x, topLeft.y + scaledSize.y / 2},
-        BLACK
-    );
-
-    // Draw input pin
-    float pinRadius = 5 * scale;
-    DrawCircleV({topLeft.x, topLeft.y + scaledSize.y * 0.5f}, pinRadius, BLACK);
-
-    // Draw output pin
-    DrawCircleV({topLeft.x + scaledSize.x + pinRadius * 2, topLeft.y + scaledSize.y * 0.5f}, pinRadius, BLACK);
-
-    // Draw NOT text
-    int fontSize = static_cast<int>(20 * scale);
-    Vector2 textSize = MeasureTextEx(GetFontDefault(), "NOT", fontSize, 1);
-    Vector2 textPos = {
-        position.x - textSize.x / 2,
-        position.y - textSize.y / 2
-    };
-    DrawTextEx(GetFontDefault(), "NOT", textPos, fontSize, 1, BLACK);
+    if (isHighlighted) {
+        DrawRectangleLinesEx(dest, 2, YELLOW);
+    }
 }
 
 bool NotGate::IsHovered(Vector2 mousePosition) {

@@ -13,21 +13,7 @@ Component::Component(Vector2 position, const std::string& textureKey, int numInp
     outputStates.resize(numOutputs, false);
 }
 
-void Component::Draw() const
-{
-    Texture2D texture = GetTexture();
-    Color tint = isHighlighted ? YELLOW : WHITE;
-    Vector2 scaledSize = GetScaledSize();
-    Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
-    Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
-    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };
-    DrawTexturePro(texture, source, dest, origin, rotation, tint);
-    DrawPins();
-
-    if (isHighlighted) {
-        DrawRectangleLinesEx(dest, 2, YELLOW);
-    }
-}
+// Remove the Draw() implementation from here
 
 
 Vector2 Component::GetInputPinPosition(int index) const
