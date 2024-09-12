@@ -27,6 +27,7 @@ void NotGate::Draw() const {
     if (isHighlighted) {
         DrawRectangleLinesEx(dest, 2, YELLOW);
     }
+    DrawDebugFrames();
 }
 
 bool NotGate::IsHovered(Vector2 mousePosition) {

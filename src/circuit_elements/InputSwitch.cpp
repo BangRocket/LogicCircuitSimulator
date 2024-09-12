@@ -25,6 +25,7 @@ void InputSwitch::Draw() const {
     if (isHighlighted) {
         DrawRectangleLinesEx(dest, 2, YELLOW);
     }
+    DrawDebugFrames();
 
     // Draw switch state
     Color switchColor = state ? GREEN : RED;

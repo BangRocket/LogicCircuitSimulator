@@ -59,10 +59,15 @@ public:
 
     static const float PIN_RADIUS;
     static const float PIN_HOVER_RADIUS;
+    static bool showDebugFrames;
+
+    static void ToggleDebugFrames() { showDebugFrames = !showDebugFrames; }
+    static bool AreDebugFramesEnabled() { return showDebugFrames; }
 
 protected:
     Vector2 position;
     std::string textureKey;
+    void DrawDebugFrames() const;
     int numInputs;
     int numOutputs;
     std::vector<bool> inputStates;

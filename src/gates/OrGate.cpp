@@ -27,6 +27,7 @@ void OrGate::Draw() const {
     if (isHighlighted) {
         DrawRectangleLinesEx(dest, 2, YELLOW);
     }
+    DrawDebugFrames();
 }
 
 bool OrGate::IsHovered(Vector2 mousePosition) {

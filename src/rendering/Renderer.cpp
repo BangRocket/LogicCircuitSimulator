@@ -164,6 +164,7 @@ void Renderer::DrawDebugInfo(ProgramState currentState, ComponentType currentCom
     DrawText(TextFormat("Camera Zoom: %.2f", m_camera.zoom), 10, m_toolbarHeight + 160, 20, DARKGRAY);
     DrawText(TextFormat("Camera Target: (%.2f, %.2f)", m_camera.target.x, m_camera.target.y), 10, m_toolbarHeight + 190, 20, DARKGRAY);
     DrawText(TextFormat("Placement Rotation: %.2f", placementRotation), 10, m_toolbarHeight + 220, 20, DARKGRAY);
+    DrawText(TextFormat("Debug Frames: %s", Component::AreDebugFramesEnabled() ? "ON" : "OFF"), 10, m_toolbarHeight + 250, 20, DARKGRAY);
 }
 
 Vector2 Renderer::ScreenToWorld(Vector2 screenPos) {

@@ -247,6 +247,10 @@ void HandleInput() {
         showDebugInfo = !showDebugInfo;
     }
 
+    if (IsKeyPressed(KEY_F)) {
+        Component::ToggleDebugFrames();
+    }
+
     // Handle wire deletion
     if (IsKeyPressed(KEY_DELETE) || IsKeyPressed(KEY_BACKSPACE)) {
         Wire* wireToDelete = GetWireAtPosition(worldMousePos);

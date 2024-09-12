@@ -5,12 +5,39 @@
 
 const float Component::PIN_RADIUS = 5.0f;
 const float Component::PIN_HOVER_RADIUS = 10.0f;
+bool Component::showDebugFrames = false;
 
 Component::Component(Vector2 position, const std::string& textureKey, int numInputs, int numOutputs)
     : position(position), textureKey(textureKey), numInputs(numInputs), numOutputs(numOutputs), isHighlighted(false), scale(1.0f), rotation(0.0f)
 {
     inputStates.resize(numInputs, false);
     outputStates.resize(numOutputs, false);
+}
+
+void Component::DrawDebugFrames() const
+{
+    if (!showDebugFrames) return;
+
+    Vector2 scaledSize = GetScaledSize();
+    Rectangle componentRect = { 
+        position.x - scaledSize.x / 2, 
+        position.y - scaledSize.y / 2, 
+        scaledSize.x, 
+        scaledSize.y 
+    };
+    DrawRectangleLinesEx(componentRect, 2, GREEN);
+
+    for (int i = 0; i < numInputs; ++i)
+    {
+        Vector2 pinPos = GetInputPinPosition(i);
+        DrawCircleV(pinPos, PIN_RADIUS * 2 * scale, BLUE);
+    }
+
+    for (int i = 0; i < numOutputs; ++i)
+    {
+        Vector2 pinPos = GetOutputPinPosition(i);
+        DrawCircleV(pinPos, PIN_RADIUS * 2 * scale, RED);
+    }
 }
 
 // Remove the Draw() implementation from here
