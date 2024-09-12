@@ -27,6 +27,16 @@ void Component::DrawDebugFrames() const
     };
     DrawRectangleLinesEx(componentRect, 2, GREEN);
 
+    // Draw a small box to represent the origin
+    float originBoxSize = 4 * scale;
+    DrawRectangle(
+        position.x - originBoxSize / 2,
+        position.y - originBoxSize / 2,
+        originBoxSize,
+        originBoxSize,
+        YELLOW
+    );
+
     for (int i = 0; i < numInputs; ++i)
     {
         Vector2 pinPos = GetInputPinPosition(i);
