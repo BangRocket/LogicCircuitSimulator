@@ -4,7 +4,7 @@
 
 AndGate::AndGate(Vector2 position) : Component(position, "and_gate", 2, 1) {
     // Load the SVG texture for the AND gate
-    ResourceManager::getInstance().loadSVGTexture("and_gate", "assets/and_gate.svg", 100, 100);
+    ResourceManager::getInstance().loadSVGTexture("and_gate", "assets/and_gate.svg", 200, 200);
     std::cout << "AND gate created at position: (" << position.x << ", " << position.y << ")" << std::endl;
 }
 
