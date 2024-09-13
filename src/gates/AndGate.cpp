@@ -42,13 +42,20 @@ bool AndGate::IsHovered(Vector2 mousePosition) {
 }
 
 Vector2 AndGate::GetInputPinPosition(int index) const {
+    Vector2 localPos;
     if (index == 0) {
-        return { position.x, position.y + 30 };
+        localPos = { -size.x / 2, -size.y / 2 + 30 };
     } else {
-        return { position.x, position.y + 70 };
+        localPos = { -size.x / 2, size.y / 2 - 30 };
     }
+    localPos = Vector2Scale(localPos, scale);
+    localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+    return Vector2Add(position, localPos);
 }
 
 Vector2 AndGate::GetOutputPinPosition(int index) const {
-    return { position.x + 100, position.y + 50 };
+    Vector2 localPos = { size.x / 2, 0 };
+    localPos = Vector2Scale(localPos, scale);
+    localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+    return Vector2Add(position, localPos);
 }

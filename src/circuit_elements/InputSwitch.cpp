@@ -52,8 +52,10 @@ void InputSwitch::ToggleState() {
 
 Vector2 InputSwitch::GetOutputPinPosition(int index) const {
     if (index == 0) {
-        Vector2 pos = GetPosition();
-        return {pos.x + SWITCH_RADIUS * 2, pos.y + SWITCH_RADIUS};
+        Vector2 localPos = { size.x / 2, 0 };
+        localPos = Vector2Scale(localPos, scale);
+        localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+        return Vector2Add(position, localPos);
     }
     return {0, 0}; // Invalid index
 }
