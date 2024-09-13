@@ -1,6 +1,7 @@
 #include "InputSwitch.h"
 #include "../managers/ResourceManager.h"
 #include <iostream>
+#include <raymath.h>
 
 const float InputSwitch::SWITCH_RADIUS = 15.0f;
 

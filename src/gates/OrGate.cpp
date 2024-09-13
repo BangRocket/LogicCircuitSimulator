@@ -1,6 +1,7 @@
 #include "OrGate.h"
 #include "../managers/ResourceManager.h"
 #include <iostream>
+#include <raymath.h>
 
 OrGate::OrGate(Vector2 position) : Component(position, "or_gate", 2, 1) {
     // Load the SVG texture for the OR gate

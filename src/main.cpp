@@ -205,7 +205,7 @@ void HandleInput() {
                     if (newComponent) {
                         newComponent->SetComponentManager(&ComponentManager::getInstance());
                         newComponent->SetRotation(placementRotation);
-                        newComponent->SetScale(camera.zoom);
+                        //newComponent->SetScale(camera.zoom);
                         ComponentManager::getInstance().addComponent(newComponent);
                         std::cout << "New component created at: (" << snappedPosition.x << ", " << snappedPosition.y 
                                   << ") with rotation " << placementRotation 

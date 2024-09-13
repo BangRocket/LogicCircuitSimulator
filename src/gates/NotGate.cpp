@@ -1,6 +1,7 @@
 #include "NotGate.h"
 #include "../managers/ResourceManager.h"
 #include <iostream>
+#include <raymath.h>
 
 NotGate::NotGate(Vector2 position) : Component(position, "not_gate", 1, 1) {
     // Load the SVG texture for the NOT gate

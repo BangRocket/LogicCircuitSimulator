@@ -1,6 +1,7 @@
 #include "AndGate.h"
 #include "../managers/ResourceManager.h"
 #include <iostream>
+#include <raymath.h>
 
 AndGate::AndGate(Vector2 position) : Component(position, "and_gate", 2, 1) {
     // Load the SVG texture for the AND gate
