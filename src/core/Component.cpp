@@ -50,9 +50,6 @@ void Component::DrawDebugFrames() const
     }
 }
 
-// Remove the Draw() implementation from here
-
-
 Vector2 Component::GetInputPinPosition(int index) const
 {
     Vector2 scaledSize = GetScaledSize();
