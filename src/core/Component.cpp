@@ -53,15 +53,13 @@ void Component::DrawDebugFrames() const
 Vector2 Component::GetInputPinPosition(int index) const
 {
     Vector2 scaledSize = GetScaledSize();
-    Vector2 pinPos = { -scaledSize.x / 2, (-scaledSize.y / 2) + (30.0f + index * 40.0f) * scale };
-    return Vector2Add(position, Vector2Rotate(pinPos, rotation * DEG2RAD));
+    return { -scaledSize.x / 2, (-scaledSize.y / 2) + (30.0f + index * 40.0f) * scale };
 }
 
 Vector2 Component::GetOutputPinPosition(int index) const
 {
     Vector2 scaledSize = GetScaledSize();
-    Vector2 pinPos = { scaledSize.x / 2, (-scaledSize.y / 2) + 50.0f * scale };
-    return Vector2Add(position, Vector2Rotate(pinPos, rotation * DEG2RAD));
+    return { scaledSize.x / 2, (-scaledSize.y / 2) + 50.0f * scale };
 }
 
 Vector2 Component::GetPinPosition(int pinIndex) const
@@ -112,16 +110,23 @@ void Component::SetOutputState(int outputIndex, bool state)
 
 void Component::DrawPins() const
 {
+    Vector2 scaledSize = GetScaledSize();
+    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };
+
     for (int i = 0; i < numInputs; ++i)
     {
         Vector2 pinPos = GetInputPinPosition(i);
-        DrawCircleV(pinPos, PIN_RADIUS * scale, inputStates[i] ? RED : BLACK);
+        Vector2 rotatedPinPos = Vector2Rotate(Vector2Subtract(pinPos, position), rotation * DEG2RAD);
+        rotatedPinPos = Vector2Add(rotatedPinPos, position);
+        DrawCircleV(rotatedPinPos, PIN_RADIUS * scale, inputStates[i] ? RED : BLACK);
     }
 
     for (int i = 0; i < numOutputs; ++i)
     {
         Vector2 pinPos = GetOutputPinPosition(i);
-        DrawCircleV(pinPos, PIN_RADIUS * scale, outputStates[i] ? RED : BLACK);
+        Vector2 rotatedPinPos = Vector2Rotate(Vector2Subtract(pinPos, position), rotation * DEG2RAD);
+        rotatedPinPos = Vector2Add(rotatedPinPos, position);
+        DrawCircleV(rotatedPinPos, PIN_RADIUS * scale, outputStates[i] ? RED : BLACK);
     }
 }
 
@@ -142,10 +147,13 @@ bool Component::IsHovered(Vector2 mousePosition) const
 
 int Component::HoveredPin(Vector2 mousePosition) const
 {
+    Vector2 localMousePos = Vector2Subtract(mousePosition, position);
+    localMousePos = Vector2Rotate(localMousePos, -rotation * DEG2RAD);
+
     for (int i = 0; i < numInputs; ++i)
     {
         Vector2 pinPos = GetInputPinPosition(i);
-        if (CheckCollisionPointCircle(mousePosition, pinPos, PIN_HOVER_RADIUS * scale))
+        if (CheckCollisionPointCircle(localMousePos, pinPos, PIN_HOVER_RADIUS * scale))
         {
             return i;
         }
@@ -154,7 +162,7 @@ int Component::HoveredPin(Vector2 mousePosition) const
     for (int i = 0; i < numOutputs; ++i)
     {
         Vector2 pinPos = GetOutputPinPosition(i);
-        if (CheckCollisionPointCircle(mousePosition, pinPos, PIN_HOVER_RADIUS * scale))
+        if (CheckCollisionPointCircle(localMousePos, pinPos, PIN_HOVER_RADIUS * scale))
         {
             return numInputs + i;
         }
