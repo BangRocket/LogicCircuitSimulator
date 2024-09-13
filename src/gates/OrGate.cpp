@@ -4,7 +4,7 @@
 
 OrGate::OrGate(Vector2 position) : Component(position, "or_gate", 2, 1) {
     // Load the SVG texture for the OR gate
-    ResourceManager::getInstance().loadSVGTexture("or_gate", "assets/or_gate.svg", 100, 100);
+    ResourceManager::getInstance().loadSVGTexture("or_gate", "assets/or_gate.svg", 200, 200);
     std::cout << "OR gate created at position: (" << position.x << ", " << position.y << ")" << std::endl;
 }
 
