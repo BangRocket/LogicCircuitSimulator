@@ -85,14 +85,19 @@ void Renderer::Render(ProgramState currentState, Component* wireStartComponent, 
             if (component->IsHovered(worldMousePos) || component == selectedComponent) {
                 Vector2 componentPos = component->GetPosition();
                 Vector2 componentSize = component->GetScaledSize();
-                DrawRotatedRectangleLinesEx(Rectangle{componentPos.x, componentPos.y, componentSize.x, componentSize.y}, component->GetRotation(), 2, YELLOW);
-                
+                DrawRotatedRectangleLinesEx(Rectangle{
+                    componentPos.x - componentSize.x / 2, 
+                    componentPos.y - componentSize.y / 2, 
+                    componentSize.x, 
+                    componentSize.y
+                }, component->GetRotation(), 2, ORANGE);
+        
                 // Draw hover effects for pins
                 for (int i = 0; i < component->GetNumInputs() + component->GetNumOutputs(); ++i) {
                     Vector2 pinPos = component->GetPinPosition(i);
                     if (Vector2Distance(pinPos, worldMousePos) <= CONNECTION_RADIUS * m_globalScaleFactor) {
-                        DrawCircleV(pinPos, CONNECTION_RADIUS * m_globalScaleFactor, Fade(YELLOW, 0.3f));
-                        DrawCircleV(pinPos, Component::PIN_RADIUS * m_globalScaleFactor, YELLOW);
+                        DrawCircleV(pinPos, CONNECTION_RADIUS * m_globalScaleFactor, Fade(ORANGE, 0.3f));
+                        DrawCircleV(pinPos, Component::PIN_RADIUS * m_globalScaleFactor, ORANGE);
                     }
                 }
             }

@@ -23,7 +23,12 @@ void InputSwitch::Draw() const {
     DrawPins();
 
     if (isHighlighted) {
-        DrawRectangleLinesEx(dest, 2, YELLOW);
+        DrawRectangleLinesEx(Rectangle{
+            position.x - scaledSize.x / 2,
+            position.y - scaledSize.y / 2,
+            scaledSize.x,
+            scaledSize.y
+        }, 2, ORANGE);
     }
     DrawDebugFrames();
 
