@@ -240,17 +240,18 @@ Wire* Input::GetWireAtPosition(Vector2 position) {
 
 void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 worldMousePos, Renderer* renderer, ProgramState& currentState) {
     if (selectedComponent) {
+        Vector2 componentPos = selectedComponent->GetPosition();
+        Vector2 componentSize = selectedComponent->GetScaledSize();
+        Rectangle componentBounds = {
+            componentPos.x - componentSize.x / 2,
+            componentPos.y - componentSize.y / 2,
+            componentSize.x,
+            componentSize.y
+        };
+
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-            if (currentState == ProgramState::SELECTING || currentState == ProgramState::IDLE) {
-                Vector2 componentPos = selectedComponent->GetPosition();
-                Vector2 componentSize = selectedComponent->GetScaledSize();
-                Rectangle componentBounds = {
-                    componentPos.x - componentSize.x / 2,
-                    componentPos.y - componentSize.y / 2,
-                    componentSize.x,
-                    componentSize.y
-                };
-                
+            if (currentState == ProgramState::SELECTING) {
+                // If we're in SELECTING state and the mouse is not over the component, start moving
                 if (!CheckCollisionPointRec(worldMousePos, componentBounds)) {
                     currentState = ProgramState::MOVING_COMPONENT;
                 }
@@ -262,11 +263,8 @@ void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 world
                 UpdateWiresForComponent(selectedComponent);
             }
         } else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
-            if (currentState == ProgramState::MOVING_COMPONENT) {
-                currentState = ProgramState::IDLE;
-            } else if (currentState == ProgramState::SELECTING) {
-                currentState = ProgramState::IDLE;
-            }
+            // When the mouse button is released, always go back to IDLE state
+            currentState = ProgramState::IDLE;
         }
     }
 }
