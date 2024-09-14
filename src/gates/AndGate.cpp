@@ -56,9 +56,8 @@ void AndGate::Draw() const {
 }
 
 bool AndGate::IsHovered(Vector2 mousePosition) {
-    Vector2 scaledSize = GetScaledSize();
-    Vector2 topLeft = {position.x - scaledSize.x / 2, position.y - scaledSize.y / 2};
-    return CheckCollisionPointRec(mousePosition, {topLeft.x, topLeft.y, scaledSize.x, scaledSize.y});
+    float hoverRadius = 10.0f * scale; // Adjust this value to change the size of the hover area
+    return CheckCollisionPointCircle(mousePosition, position, hoverRadius);
 }
 
 Vector2 AndGate::GetInputPinPosition(int index) const {
