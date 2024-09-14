@@ -203,8 +203,8 @@ Vector2 Renderer::WorldToScreen(Vector2 worldPos) {
 
 Vector2 Renderer::SnapToGrid(Vector2 position) {
     return {
-        float(int(position.x / GRID_SIZE) * GRID_SIZE),
-        float(int(position.y / GRID_SIZE) * GRID_SIZE)
+        floorf(position.x / GRID_SIZE) * GRID_SIZE + GRID_SIZE * 2,
+        floorf(position.y / GRID_SIZE) * GRID_SIZE + GRID_SIZE * 2
     };
 }
 
@@ -213,7 +213,17 @@ int Renderer::GetToolbarHeight() const {
 }
 
 void Renderer::DrawRotatedComponent(const Component* component) {
-    component->Draw();
+    Texture2D texture = component->GetTexture();
+    Vector2 position = component->GetPosition();
+    float rotation = component->GetRotation();
+    Vector2 size = component->GetScaledSize();
+    
+    Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
+    Rectangle dest = { position.x, position.y, size.x * m_camera.zoom, size.y * m_camera.zoom };
+    Vector2 origin = { size.x * m_camera.zoom / 2, size.y * m_camera.zoom / 2 };
+    
+    DrawTexturePro(texture, source, dest, origin, rotation, WHITE);
+    component->DrawPins();
 }
 
 void Renderer::DrawRotatedRectangleLinesEx(Rectangle rec, float rotation, float lineThick, Color color) {

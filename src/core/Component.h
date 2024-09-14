@@ -48,7 +48,7 @@ public:
     void SetScale(float newScale);
     float GetScale() const { return scale; }
 
-    Vector2 GetScaledSize() const { return {size.x * scale, size.y * scale}; }
+    Vector2 GetScaledSize() const { return {size.x, size.y}; } // Size is now fixed
 
     void DrawPins() const;
 
@@ -73,7 +73,8 @@ protected:
     std::vector<bool> inputStates;
     std::vector<bool> outputStates;
     bool isHighlighted;
-    Vector2 size = {50, 50}; // Default size for all components
+    static const int GRID_SIZE = 32; // Size of one grid cell
+    Vector2 size = {GRID_SIZE * 4, GRID_SIZE * 4}; // Default size for all components (4x4 grid)
     ComponentManager* componentManager;
     float scale = 1.0f;
     float rotation = 0.0f;

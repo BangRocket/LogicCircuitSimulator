@@ -44,7 +44,7 @@ private:
     static constexpr int ORIGINAL_SCREEN_WIDTH = 800;
     static constexpr int ORIGINAL_SCREEN_HEIGHT = 600;
     static constexpr int ORIGINAL_TOOLBAR_HEIGHT = 40;
-    static constexpr int GRID_SIZE = 32;
+    static constexpr int GRID_SIZE = Component::GRID_SIZE;
     static constexpr float MIN_ZOOM = 0.5f;
     static constexpr float MAX_ZOOM = 2.0f;
     static constexpr float PIN_RADIUS = 5.0f;

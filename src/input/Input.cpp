@@ -21,7 +21,10 @@ void Input::HandleInput(ProgramState& currentState,
                         std::vector<Wire*>& wires) {
     Vector2 mousePosition = GetMousePosition();
     Vector2 worldMousePos = renderer->ScreenToWorld(mousePosition);
-    Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
+    Vector2 snappedPosition = {
+        floorf(worldMousePos.x / Component::GRID_SIZE) * Component::GRID_SIZE + Component::GRID_SIZE * 2,
+        floorf(worldMousePos.y / Component::GRID_SIZE) * Component::GRID_SIZE + Component::GRID_SIZE * 2
+    };
 
     // Handle toolbar interactions
     if (mousePosition.y < renderer->GetToolbarHeight()) {
