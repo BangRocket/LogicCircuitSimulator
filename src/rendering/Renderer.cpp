@@ -5,6 +5,9 @@
 #include "../core/GameState.h"
 #include <raymath.h>
 
+// Add this line to use Component::GRID_SIZE
+using GRID_SIZE = Component::GRID_SIZE;
+
 Renderer::Renderer(Camera2D& camera, ComponentManager& componentManager, std::vector<Wire*>& wires)
     : m_camera(camera), m_componentManager(componentManager), m_wires(wires), highlightedWire(nullptr) {
     m_toolbarHeight = static_cast<int>(ORIGINAL_TOOLBAR_HEIGHT * m_globalScaleFactor);
