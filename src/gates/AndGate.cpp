@@ -21,23 +21,10 @@ void AndGate::Update() {
 }
 
 void AndGate::Draw() const {
-    Texture2D texture = GetTexture();
-    Color tint = isHighlighted ? YELLOW : WHITE;
-    Vector2 scaledSize = GetScaledSize();
-    Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
-    Rectangle dest = { 
-        position.x - scaledSize.x / 2, 
-        position.y - scaledSize.y / 2, 
-        scaledSize.x, 
-        scaledSize.y 
-    };
-    Vector2 origin = { 0, 0 };  // Set origin to top-left corner
-    DrawTexturePro(texture, source, dest, origin, rotation, tint);
-    
+    DrawComponent();
     DrawPins();
-
     if (isHighlighted) {
-        DrawRectangleLinesEx(dest, 2, ORANGE);
+        DrawRectangleLinesEx(GetDestRect(), 2, ORANGE);
     }
     DrawDebugFrames();
 }

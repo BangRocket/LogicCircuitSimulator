@@ -14,22 +14,10 @@ void InputSwitch::Update() {
 }
 
 void InputSwitch::Draw() const {
-    Texture2D texture = GetTexture();
-    Color tint = isHighlighted ? YELLOW : WHITE;
-    Vector2 scaledSize = GetScaledSize();
-    Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
-    Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
-    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };
-    DrawTexturePro(texture, source, dest, origin, rotation, tint);
+    DrawComponent();
     DrawPins();
-
     if (isHighlighted) {
-        DrawRectangleLinesEx(Rectangle{
-            position.x - scaledSize.x / 2,
-            position.y - scaledSize.y / 2,
-            scaledSize.x,
-            scaledSize.y
-        }, 2, ORANGE);
+        DrawRectangleLinesEx(GetDestRect(), 2, ORANGE);
     }
     DrawDebugFrames();
 

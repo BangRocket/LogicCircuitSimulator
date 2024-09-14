@@ -67,6 +67,11 @@ public:
     float GetRotation() const;
     void SetRotation(float newRotation);
 
+    // New methods for origin and drawing
+    Vector2 GetOrigin() const;
+    Rectangle GetDestRect() const;
+    void DrawComponent() const;
+
 public:
     static const int GRID_SIZE = 32; // Size of one grid cell
 
