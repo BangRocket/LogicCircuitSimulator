@@ -7,6 +7,10 @@ NotGate::NotGate(Vector2 position) : Component(position, "not_gate", 1, 1) {
     // Load the SVG texture for the NOT gate
     ResourceManager::getInstance().loadSVGTexture("not_gate", "assets/not_gate.svg", 200, 200);
     std::cout << "NOT gate created at position: (" << position.x << ", " << position.y << ")" << std::endl;
+
+    // Set pin positions based on the SVG
+    inputPins[0] = {-1.0f, 0.0f};
+    outputPins[0] = {1.0f, 0.0f};
 }
 
 void NotGate::Update() {

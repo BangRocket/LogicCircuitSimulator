@@ -7,6 +7,11 @@ AndGate::AndGate(Vector2 position) : Component(position, "and_gate", 2, 1) {
     // Load the SVG texture for the AND gate
     ResourceManager::getInstance().loadSVGTexture("and_gate", "assets/and_gate.svg", 200, 200);
     std::cout << "AND gate created at position: (" << position.x << ", " << position.y << ")" << std::endl;
+
+    // Set pin positions based on the SVG
+    inputPins[0] = {-1.0f, -0.4f};
+    inputPins[1] = {-1.0f, 0.4f};
+    outputPins[0] = {1.0f, 0.0f};
 }
 
 void AndGate::Update() {

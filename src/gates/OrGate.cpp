@@ -7,6 +7,11 @@ OrGate::OrGate(Vector2 position) : Component(position, "or_gate", 2, 1) {
     // Load the SVG texture for the OR gate
     ResourceManager::getInstance().loadSVGTexture("or_gate", "assets/or_gate.svg", 200, 200);
     std::cout << "OR gate created at position: (" << position.x << ", " << position.y << ")" << std::endl;
+
+    // Set pin positions based on the SVG
+    inputPins[0] = {-1.0f, -0.4f};
+    inputPins[1] = {-1.0f, 0.4f};
+    outputPins[0] = {1.0f, 0.0f};
 }
 
 void OrGate::Update() {

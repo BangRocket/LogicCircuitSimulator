@@ -12,6 +12,14 @@ Component::Component(Vector2 position, const std::string& textureKey, int numInp
 {
     inputStates.resize(numInputs, false);
     outputStates.resize(numOutputs, false);
+    
+    // Default pin positions (to be overridden by specific components)
+    for (int i = 0; i < numInputs; ++i) {
+        inputPins.push_back({-1.0f, -0.5f + (1.0f / (numInputs + 1)) * (i + 1)});
+    }
+    for (int i = 0; i < numOutputs; ++i) {
+        outputPins.push_back({1.0f, 0.0f});
+    }
 }
 
 void Component::DrawDebugFrames() const
@@ -52,14 +60,26 @@ void Component::DrawDebugFrames() const
 
 Vector2 Component::GetInputPinPosition(int index) const
 {
-    Vector2 scaledSize = GetScaledSize();
-    return { -scaledSize.x / 2, (-scaledSize.y / 2) + (30.0f + index * 40.0f) * scale };
+    if (index >= 0 && index < inputPins.size()) {
+        Vector2 scaledSize = GetScaledSize();
+        Vector2 localPos = {inputPins[index].x * scaledSize.x / 2, inputPins[index].y * scaledSize.y};
+        localPos = Vector2Scale(localPos, scale);
+        localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+        return Vector2Add(position, localPos);
+    }
+    return position;
 }
 
 Vector2 Component::GetOutputPinPosition(int index) const
 {
-    Vector2 scaledSize = GetScaledSize();
-    return { scaledSize.x / 2, (-scaledSize.y / 2) + 50.0f * scale };
+    if (index >= 0 && index < outputPins.size()) {
+        Vector2 scaledSize = GetScaledSize();
+        Vector2 localPos = {outputPins[index].x * scaledSize.x / 2, outputPins[index].y * scaledSize.y};
+        localPos = Vector2Scale(localPos, scale);
+        localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+        return Vector2Add(position, localPos);
+    }
+    return position;
 }
 
 Vector2 Component::GetPinPosition(int pinIndex) const
