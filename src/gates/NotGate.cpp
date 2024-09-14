@@ -77,3 +77,17 @@ Vector2 NotGate::GetOutputPinPosition(int index) const {
     localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
     return Vector2Add(position, localPos);
 }
+
+Vector2 NotGate::GetInputPinPosition(int index) const {
+    Vector2 localPos = { -size.x / 2, 0 };
+    localPos = Vector2Scale(localPos, scale);
+    localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+    return Vector2Add(position, localPos);
+}
+
+Vector2 NotGate::GetOutputPinPosition(int index) const {
+    Vector2 localPos = { size.x / 2, 0 };
+    localPos = Vector2Scale(localPos, scale);
+    localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+    return Vector2Add(position, localPos);
+}
