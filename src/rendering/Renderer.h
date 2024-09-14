@@ -13,7 +13,7 @@ public:
     Renderer(Camera2D& camera, ComponentManager& componentManager, std::vector<Wire*>& wires);
 
     void HandleResize(int newWidth, int newHeight, Camera2D& camera, int originalWidth, int originalHeight);
-    void Render(ProgramState currentState, Component* wireStartComponent, int wireStartPin, Vector2 wireEndPos, bool showDebugInfo, Component* selectedComponent, ComponentType currentComponentType, float placementRotation);
+    void Render(ProgramState currentState, Component* wireStartComponent, int wireStartPin, Vector2 wireEndPos, bool showDebugInfo, Component* selectedComponent, ComponentType currentComponentType, float placementRotation, Vector2 mousePosition, Vector2 worldMousePos);
     
     Vector2 ScreenToWorld(Vector2 screenPos);
     Vector2 WorldToScreen(Vector2 worldPos);
@@ -25,7 +25,7 @@ public:
 private:
     void DrawGrid();
     void DrawToolbar(ComponentType currentComponentType);
-    void DrawDebugInfo(ProgramState currentState, ComponentType currentComponentType, float placementRotation);
+    void DrawDebugInfo(ProgramState currentState, ComponentType currentComponentType, float placementRotation, Vector2 mousePosition, Vector2 worldMousePos);
     void DrawRotatedComponent(const Component* component);
     void DrawRotatedRectangleLinesEx(Rectangle rec, float rotation, float lineThick, Color color);
 

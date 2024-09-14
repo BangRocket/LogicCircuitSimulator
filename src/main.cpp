@@ -76,7 +76,9 @@ int main() {
     while (!WindowShouldClose()) {
         Input::HandleInput(currentState, currentComponentType, wireStartComponent, wireStartPin, wireEndPos, showDebugInfo, selectedComponent, placementRotation, camera, renderer, wires);
         Update();
-        renderer->Render(currentState, wireStartComponent, wireStartPin, wireEndPos, showDebugInfo, selectedComponent, currentComponentType, placementRotation);
+        Vector2 mousePosition = GetMousePosition();
+        Vector2 worldMousePos = renderer->ScreenToWorld(mousePosition);
+        renderer->Render(currentState, wireStartComponent, wireStartPin, wireEndPos, showDebugInfo, selectedComponent, currentComponentType, placementRotation, mousePosition, worldMousePos);
     }
 
     // Clean up
