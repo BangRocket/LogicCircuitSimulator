@@ -131,6 +131,7 @@ void Input::HandleInput(ProgramState& currentState,
                                   << ") with rotation " << placementRotation 
                                   << " and scale " << camera.zoom << std::endl;
                         placementRotation = 0.0f;  // Reset placement rotation after placing component
+                        selectedComponent = newComponent;  // Set the newly placed component as the selected component
                     }
                     currentState = ProgramState::IDLE;
                 }
@@ -240,7 +241,7 @@ Wire* Input::GetWireAtPosition(Vector2 position) {
 void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 worldMousePos, Renderer* renderer, ProgramState& currentState) {
     if (selectedComponent) {
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-            if (currentState == ProgramState::SELECTING) {
+            if (currentState == ProgramState::SELECTING || currentState == ProgramState::IDLE) {
                 Vector2 componentPos = selectedComponent->GetPosition();
                 Vector2 componentSize = selectedComponent->GetScaledSize();
                 Rectangle componentBounds = {
@@ -260,8 +261,12 @@ void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 world
                 selectedComponent->SetPosition(snappedPosition);
                 UpdateWiresForComponent(selectedComponent);
             }
-        } else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON) && currentState == ProgramState::MOVING_COMPONENT) {
-            currentState = ProgramState::SELECTING;
+        } else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+            if (currentState == ProgramState::MOVING_COMPONENT) {
+                currentState = ProgramState::IDLE;
+            } else if (currentState == ProgramState::SELECTING) {
+                currentState = ProgramState::IDLE;
+            }
         }
     }
 }
