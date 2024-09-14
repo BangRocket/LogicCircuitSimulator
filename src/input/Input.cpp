@@ -241,8 +241,20 @@ void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 world
     if (selectedComponent) {
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
             if (currentState == ProgramState::SELECTING) {
-                currentState = ProgramState::MOVING_COMPONENT;
+                Vector2 componentPos = selectedComponent->GetPosition();
+                Vector2 componentSize = selectedComponent->GetScaledSize();
+                Rectangle componentBounds = {
+                    componentPos.x - componentSize.x / 2,
+                    componentPos.y - componentSize.y / 2,
+                    componentSize.x,
+                    componentSize.y
+                };
+                
+                if (!CheckCollisionPointRec(worldMousePos, componentBounds)) {
+                    currentState = ProgramState::MOVING_COMPONENT;
+                }
             }
+            
             if (currentState == ProgramState::MOVING_COMPONENT) {
                 Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
                 selectedComponent->SetPosition(snappedPosition);
