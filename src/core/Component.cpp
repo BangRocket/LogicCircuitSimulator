@@ -229,3 +229,29 @@ Texture2D Component::GetTexture() const
 {
     return ResourceManager::getInstance().getTexture(textureKey);
 }
+
+Vector2 Component::GetOrigin() const
+{
+    return { 0, 0 };  // Set origin to top-left corner
+}
+
+Rectangle Component::GetDestRect() const
+{
+    Vector2 scaledSize = GetScaledSize();
+    return { 
+        position.x - scaledSize.x / 2, 
+        position.y - scaledSize.y / 2, 
+        scaledSize.x, 
+        scaledSize.y 
+    };
+}
+
+void Component::DrawComponent() const
+{
+    Texture2D texture = GetTexture();
+    Color tint = isHighlighted ? YELLOW : WHITE;
+    Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
+    Rectangle dest = GetDestRect();
+    Vector2 origin = GetOrigin();
+    DrawTexturePro(texture, source, dest, origin, rotation, tint);
+}
