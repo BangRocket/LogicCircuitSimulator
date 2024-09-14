@@ -23,12 +23,6 @@ void Input::HandleInput(ProgramState& currentState,
     Vector2 worldMousePos = renderer->ScreenToWorld(mousePosition);
     Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
 
-    // Debug information
-    std::cout << "Mouse Position: (" << mousePosition.x << ", " << mousePosition.y << ")" << std::endl;
-    std::cout << "World Mouse Position: (" << worldMousePos.x << ", " << worldMousePos.y << ")" << std::endl;
-    std::cout << "Left Mouse Button: " << (IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? "DOWN" : "UP") << std::endl;
-    std::cout << "Current State: " << static_cast<int>(currentState) << std::endl;
-
     // Handle toolbar interactions
     if (mousePosition.y < renderer->GetToolbarHeight()) {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {

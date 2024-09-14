@@ -162,28 +162,35 @@ void Renderer::DrawToolbar(ComponentType currentComponentType) {
 
 void Renderer::DrawDebugInfo(ProgramState currentState, ComponentType currentComponentType, float placementRotation, Vector2 mousePosition, Vector2 worldMousePos) {
     int screenWidth = GetScreenWidth();
-    int rightAlignX = screenWidth - 300; // Adjust this value to change the distance from the right edge
+    int screenHeight = GetScreenHeight();
+    int rightAlignX = screenWidth - 350; // Increased to accommodate longer text
+    int fontSize = 16; // Reduced font size to fit more information
+    int lineHeight = fontSize + 4; // Spacing between lines
 
-    DrawText(TextFormat("FPS: %d", GetFPS()), 10, m_toolbarHeight + 10, 20, DARKGRAY);
-    DrawText(TextFormat("Components: %zd", m_componentManager.getComponents().size()), 10, m_toolbarHeight + 40, 20, DARKGRAY);
-    DrawText(TextFormat("Wires: %zd", m_wires.size()), 10, m_toolbarHeight + 70, 20, DARKGRAY);
+    // Left side debug info
+    DrawText(TextFormat("FPS: %d", GetFPS()), 10, m_toolbarHeight + 10, fontSize, DARKGRAY);
+    DrawText(TextFormat("Components: %zd", m_componentManager.getComponents().size()), 10, m_toolbarHeight + 10 + lineHeight, fontSize, DARKGRAY);
+    DrawText(TextFormat("Wires: %zd", m_wires.size()), 10, m_toolbarHeight + 10 + 2 * lineHeight, fontSize, DARKGRAY);
     DrawText(TextFormat("State: %s", 
         currentState == ProgramState::IDLE ? "IDLE" :
         currentState == ProgramState::PLACING_COMPONENT ? "PLACING" :
         currentState == ProgramState::CONNECTING_WIRE ? "CONNECTING" :
-        currentState == ProgramState::PANNING ? "PANNING" : "SELECTING"), 10, m_toolbarHeight + 100, 20, DARKGRAY);
+        currentState == ProgramState::PANNING ? "PANNING" : 
+        currentState == ProgramState::SELECTING ? "SELECTING" :
+        "MOVING_COMPONENT"), 10, m_toolbarHeight + 10 + 3 * lineHeight, fontSize, DARKGRAY);
     DrawText(TextFormat("Current Component: %s", 
         currentComponentType == ComponentType::AND ? "AND" : 
         currentComponentType == ComponentType::OR ? "OR" : 
-        currentComponentType == ComponentType::NOT ? "NOT" : "INPUT"), 10, m_toolbarHeight + 130, 20, DARKGRAY);
-    DrawText(TextFormat("Camera Zoom: %.2f", m_camera.zoom), 10, m_toolbarHeight + 160, 20, DARKGRAY);
-    DrawText(TextFormat("Camera Target: (%.2f, %.2f)", m_camera.target.x, m_camera.target.y), 10, m_toolbarHeight + 190, 20, DARKGRAY);
-    DrawText(TextFormat("Placement Rotation: %.2f", placementRotation), 10, m_toolbarHeight + 220, 20, DARKGRAY);
-    DrawText(TextFormat("Debug Frames: %s", Component::AreDebugFramesEnabled() ? "ON" : "OFF"), 10, m_toolbarHeight + 250, 20, DARKGRAY);
+        currentComponentType == ComponentType::NOT ? "NOT" : "INPUT"), 10, m_toolbarHeight + 10 + 4 * lineHeight, fontSize, DARKGRAY);
+    DrawText(TextFormat("Camera Zoom: %.2f", m_camera.zoom), 10, m_toolbarHeight + 10 + 5 * lineHeight, fontSize, DARKGRAY);
+    DrawText(TextFormat("Camera Target: (%.2f, %.2f)", m_camera.target.x, m_camera.target.y), 10, m_toolbarHeight + 10 + 6 * lineHeight, fontSize, DARKGRAY);
+    DrawText(TextFormat("Placement Rotation: %.2f", placementRotation), 10, m_toolbarHeight + 10 + 7 * lineHeight, fontSize, DARKGRAY);
+    DrawText(TextFormat("Debug Frames: %s", Component::AreDebugFramesEnabled() ? "ON" : "OFF"), 10, m_toolbarHeight + 10 + 8 * lineHeight, fontSize, DARKGRAY);
 
-    // Mouse debug information on the right side
-    DrawText(TextFormat("Mouse Position: (%.2f, %.2f)", mousePosition.x, mousePosition.y), rightAlignX, m_toolbarHeight + 10, 20, DARKGRAY);
-    DrawText(TextFormat("World Mouse Position: (%.2f, %.2f)", worldMousePos.x, worldMousePos.y), rightAlignX, m_toolbarHeight + 40, 20, DARKGRAY);
+    // Right side debug info
+    DrawText(TextFormat("Screen Mouse: (%.1f, %.1f)", mousePosition.x, mousePosition.y), rightAlignX, m_toolbarHeight + 10, fontSize, DARKGRAY);
+    DrawText(TextFormat("World Mouse: (%.1f, %.1f)", worldMousePos.x, worldMousePos.y), rightAlignX, m_toolbarHeight + 10 + lineHeight, fontSize, DARKGRAY);
+    DrawText(TextFormat("Left Mouse: %s", IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? "DOWN" : "UP"), rightAlignX, m_toolbarHeight + 10 + 2 * lineHeight, fontSize, DARKGRAY);
 }
 
 Vector2 Renderer::ScreenToWorld(Vector2 screenPos) {
