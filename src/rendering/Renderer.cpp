@@ -191,7 +191,10 @@ Vector2 Renderer::WorldToScreen(Vector2 worldPos) {
 }
 
 Vector2 Renderer::SnapToGrid(Vector2 position) {
-    return Grid::SnapToGrid(position);
+    return {
+        floorf(position.x / Grid::GRID_SIZE) * Grid::GRID_SIZE,
+        floorf(position.y / Grid::GRID_SIZE) * Grid::GRID_SIZE
+    };
 }
 
 int Renderer::GetToolbarHeight() const {

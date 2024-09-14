@@ -3,8 +3,8 @@
 
 Vector2 Grid::SnapToGrid(Vector2 position) {
     return {
-        floorf(position.x / GRID_SIZE) * GRID_SIZE + GRID_SIZE * 2,
-        floorf(position.y / GRID_SIZE) * GRID_SIZE + GRID_SIZE * 2
+        floorf(position.x / GRID_SIZE) * GRID_SIZE,
+        floorf(position.y / GRID_SIZE) * GRID_SIZE
     };
 }
 
