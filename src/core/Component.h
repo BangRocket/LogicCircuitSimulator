@@ -77,9 +77,6 @@ public:
     static void ToggleDebugFrames() { showDebugFrames = !showDebugFrames; }
     static bool AreDebugFramesEnabled() { return showDebugFrames; }
 
-public:
-    static const int GRID_SIZE = 32; // Size of one grid cell
-
 protected:
     Vector2 position;
     std::string textureKey;
