@@ -102,8 +102,6 @@ void Input::HandleInput(ProgramState& currentState,
                         selectedComponent = nullptr;
                         currentState = ProgramState::IDLE;
                     }
-                    // Handle component dragging
-                    HandleComponentDragging(selectedComponent, worldMousePos, renderer, currentState);
                 }
                 break;
             case ProgramState::PLACING_COMPONENT:
@@ -153,6 +151,9 @@ void Input::HandleInput(ProgramState& currentState,
                 break;
         }
     }
+
+    // Handle component dragging
+    HandleComponentDragging(selectedComponent, worldMousePos, renderer, currentState);
 
     // Handle wire creation
     if (currentState == ProgramState::SELECTING && selectedComponent) {
@@ -243,8 +244,8 @@ void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 world
         Vector2 componentPos = selectedComponent->GetPosition();
         Vector2 componentSize = selectedComponent->GetScaledSize();
         Rectangle componentBounds = {
-            componentPos.x - componentSize.x / 2,
-            componentPos.y - componentSize.y / 2,
+            componentPos.x + componentSize.x / 2,
+            componentPos.y + componentSize.y / 2,
             componentSize.x,
             componentSize.y
         };
