@@ -169,14 +169,26 @@ void Input::HandleInput(ProgramState& currentState,
     }
 
     // Handle wire deletion
+    static Wire* highlightedWire = nullptr;
+    Wire* wireUnderMouse = GetWireAtPosition(worldMousePos);
+    
+    if (wireUnderMouse != highlightedWire) {
+        highlightedWire = wireUnderMouse;
+        renderer->HighlightWireForDeletion(highlightedWire);
+    }
+
     if (IsKeyPressed(KEY_DELETE) || IsKeyPressed(KEY_BACKSPACE)) {
-        Wire* wireToDelete = GetWireAtPosition(worldMousePos);
-        if (wireToDelete) {
-            ConnectionManager::getInstance().removeWire(wireToDelete);
+        if (highlightedWire) {
+            ConnectionManager::getInstance().removeWire(highlightedWire);
+            highlightedWire = nullptr;
+            renderer->HighlightWireForDeletion(nullptr);
         }
     }
 
     wireEndPos = worldMousePos;
+
+    // Handle component dragging
+    HandleComponentDragging(selectedComponent, worldMousePos, renderer);
 
     // Handle window resizing
     if (IsWindowResized()) {
@@ -223,4 +235,12 @@ Wire* Input::GetWireAtPosition(Vector2 position) {
         }
     }
     return nullptr;
+}
+
+void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 worldMousePos, Renderer* renderer) {
+    if (selectedComponent && IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+        Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
+        selectedComponent->SetPosition(snappedPosition);
+        UpdateWiresForComponent(selectedComponent);
+    }
 }

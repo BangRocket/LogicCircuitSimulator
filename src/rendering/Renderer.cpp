@@ -6,11 +6,15 @@
 #include <raymath.h>
 
 Renderer::Renderer(Camera2D& camera, ComponentManager& componentManager, std::vector<Wire*>& wires)
-    : m_camera(camera), m_componentManager(componentManager), m_wires(wires) {
+    : m_camera(camera), m_componentManager(componentManager), m_wires(wires), highlightedWire(nullptr) {
     m_toolbarHeight = static_cast<int>(ORIGINAL_TOOLBAR_HEIGHT * m_globalScaleFactor);
     m_screenWidth = GetScreenWidth();
     m_screenHeight = GetScreenHeight();
     m_aspectRatio = static_cast<float>(m_screenWidth) / m_screenHeight;
+}
+
+void Renderer::HighlightWireForDeletion(Wire* wire) {
+    highlightedWire = wire;
 }
 
 void Renderer::HandleResize(int newWidth, int newHeight, Camera2D& camera, int originalWidth, int originalHeight) {
@@ -56,7 +60,12 @@ void Renderer::Render(ProgramState currentState, Component* wireStartComponent, 
     
     // Draw all wires
     for (const auto& wire : m_wires) {
-        wire->Draw();
+        if (wire == highlightedWire) {
+            // Draw highlighted wire
+            wire->Draw(RED);
+        } else {
+            wire->Draw();
+        }
     }
 
     // Draw wire being placed

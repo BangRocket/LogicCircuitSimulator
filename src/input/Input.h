@@ -28,6 +28,7 @@ private:
     static int GetPinAtPosition(Component* component, Vector2 position);
     static void UpdateWiresForComponent(Component* component);
     static Wire* GetWireAtPosition(Vector2 position);
+    static void HandleComponentDragging(Component*& selectedComponent, Vector2 worldMousePos, Renderer* renderer);
 };
 
 #endif // INPUT_H

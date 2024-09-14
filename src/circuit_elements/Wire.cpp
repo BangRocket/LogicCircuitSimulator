@@ -29,9 +29,9 @@ void Wire::Update()
     RecalculateWirePath();
 }
 
-void Wire::Draw() const
+void Wire::Draw(Color color) const
 {
-    Color wireColor = signalState ? RED : GRAY;
+    Color wireColor = signalState ? RED : color;
     
     for (size_t i = 1; i < points.size(); ++i)
     {

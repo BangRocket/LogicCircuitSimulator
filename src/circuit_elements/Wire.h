@@ -13,7 +13,7 @@ public:
     ~Wire();
 
     void Update();
-    void Draw() const;
+    void Draw(Color color = GRAY) const;
     
     Component* GetStartComponent() const { return startComponent; }
     Component* GetEndComponent() const { return endComponent; }

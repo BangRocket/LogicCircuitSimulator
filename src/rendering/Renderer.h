@@ -20,12 +20,16 @@ public:
     Vector2 SnapToGrid(Vector2 position);
     int GetToolbarHeight() const;
 
+    void HighlightWireForDeletion(Wire* wire);
+
 private:
     void DrawGrid();
     void DrawToolbar(ComponentType currentComponentType);
     void DrawDebugInfo(ProgramState currentState, ComponentType currentComponentType, float placementRotation);
     void DrawRotatedComponent(const Component* component);
     void DrawRotatedRectangleLinesEx(Rectangle rec, float rotation, float lineThick, Color color);
+
+    Wire* highlightedWire;
 
     Camera2D& m_camera;
     ComponentManager& m_componentManager;
