@@ -88,9 +88,6 @@ void Input::HandleInput(ProgramState& currentState,
             case ProgramState::SELECTING:
             case ProgramState::PANNING:
             case ProgramState::MOVING_COMPONENT:
-            case ProgramState::SELECTING:
-            case ProgramState::IDLE:
-            case ProgramState::PANNING:
                 {
                     Component* clickedComponent = GetComponentAtPosition(worldMousePos);
                     if (clickedComponent) {
