@@ -3,6 +3,7 @@
 #include "raylib.h"
 #include "../managers/ComponentManager.h"
 #include "../core/GameState.h"
+#include "../core/Grid.h"
 #include <vector>
 
 class Wire;

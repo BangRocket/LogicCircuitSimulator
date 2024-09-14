@@ -5,9 +5,6 @@
 #include "../core/GameState.h"
 #include <raymath.h>
 
-// Add this line to use Component::GRID_SIZE
-using GRID_SIZE = Component::GRID_SIZE;
-
 Renderer::Renderer(Camera2D& camera, ComponentManager& componentManager, std::vector<Wire*>& wires)
     : m_camera(camera), m_componentManager(componentManager), m_wires(wires), highlightedWire(nullptr) {
     m_toolbarHeight = static_cast<int>(ORIGINAL_TOOLBAR_HEIGHT * m_globalScaleFactor);
@@ -128,18 +125,7 @@ void Renderer::Render(ProgramState currentState, Component* wireStartComponent, 
 void Renderer::DrawGrid() {
     Vector2 screenStart = ScreenToWorld({0, static_cast<float>(m_toolbarHeight)});
     Vector2 screenEnd = ScreenToWorld({static_cast<float>(m_screenWidth), static_cast<float>(m_screenHeight)});
-
-    int startX = static_cast<int>(screenStart.x / GRID_SIZE) * GRID_SIZE - GRID_SIZE;
-    int startY = static_cast<int>(screenStart.y / GRID_SIZE) * GRID_SIZE - GRID_SIZE;
-    int endX = static_cast<int>(screenEnd.x / GRID_SIZE) * GRID_SIZE + GRID_SIZE;
-    int endY = static_cast<int>(screenEnd.y / GRID_SIZE) * GRID_SIZE + GRID_SIZE;
-
-    for (int i = startX; i <= endX; i += GRID_SIZE) {
-        DrawLineV({static_cast<float>(i), screenStart.y}, {static_cast<float>(i), screenEnd.y}, LIGHTGRAY);
-    }
-    for (int i = startY; i <= endY; i += GRID_SIZE) {
-        DrawLineV({screenStart.x, static_cast<float>(i)}, {screenEnd.x, static_cast<float>(i)}, LIGHTGRAY);
-    }
+    Grid::Draw(screenStart, screenEnd);
 }
 
 void Renderer::DrawToolbar(ComponentType currentComponentType) {
@@ -205,10 +191,7 @@ Vector2 Renderer::WorldToScreen(Vector2 worldPos) {
 }
 
 Vector2 Renderer::SnapToGrid(Vector2 position) {
-    return {
-        floorf(position.x / GRID_SIZE) * GRID_SIZE + GRID_SIZE * 2,
-        floorf(position.y / GRID_SIZE) * GRID_SIZE + GRID_SIZE * 2
-    };
+    return Grid::SnapToGrid(position);
 }
 
 int Renderer::GetToolbarHeight() const {

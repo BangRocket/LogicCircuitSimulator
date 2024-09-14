@@ -35,6 +35,7 @@ FetchContent_MakeAvailable(raylib)
 file(GLOB_RECURSE SOURCE_FILES 
     ${CMAKE_SOURCE_DIR}/src/*.cpp
     ${CMAKE_SOURCE_DIR}/src/*.h
+    ${CMAKE_SOURCE_DIR}/src/core/Grid.cpp
 )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
