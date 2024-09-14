@@ -23,9 +23,6 @@ void OrGate::Update() {
 void OrGate::Draw() const {
     DrawComponent();
     DrawPins();
-    if (isHighlighted) {
-        DrawRectangleLinesEx(GetDestRect(), 2, ORANGE);
-    }
     DrawDebugFrames();
 }
 

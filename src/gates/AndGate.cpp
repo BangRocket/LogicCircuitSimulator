@@ -23,9 +23,6 @@ void AndGate::Update() {
 void AndGate::Draw() const {
     DrawComponent();
     DrawPins();
-    if (isHighlighted) {
-        DrawRectangleLinesEx(GetDestRect(), 2, ORANGE);
-    }
     DrawDebugFrames();
 }
 

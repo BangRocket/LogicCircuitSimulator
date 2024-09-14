@@ -22,9 +22,6 @@ void NotGate::Update() {
 void NotGate::Draw() const {
     DrawComponent();
     DrawPins();
-    if (isHighlighted) {
-        DrawRectangleLinesEx(GetDestRect(), 2, ORANGE);
-    }
     DrawDebugFrames();
 }
 

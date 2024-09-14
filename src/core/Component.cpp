@@ -246,6 +246,23 @@ Rectangle Component::GetDestRect() const
     };
 }
 
+Vector2 Component::GetOrigin() const
+{
+    Vector2 scaledSize = GetScaledSize();
+    return { scaledSize.x / 2, scaledSize.y / 2 };
+}
+
+Rectangle Component::GetDestRect() const
+{
+    Vector2 scaledSize = GetScaledSize();
+    return { 
+        position.x - scaledSize.x / 2, 
+        position.y - scaledSize.y / 2, 
+        scaledSize.x, 
+        scaledSize.y 
+    };
+}
+
 void Component::DrawComponent() const
 {
     Texture2D texture = GetTexture();

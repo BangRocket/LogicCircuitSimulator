@@ -16,9 +16,6 @@ void InputSwitch::Update() {
 void InputSwitch::Draw() const {
     DrawComponent();
     DrawPins();
-    if (isHighlighted) {
-        DrawRectangleLinesEx(GetDestRect(), 2, ORANGE);
-    }
     DrawDebugFrames();
 
     // Draw switch state
