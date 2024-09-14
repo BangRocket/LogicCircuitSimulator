@@ -209,7 +209,7 @@ int Input::GetPinAtPosition(Component* component, Vector2 position) {
 }
 
 void Input::UpdateWiresForComponent(Component* component) {
-    for (auto& wire : ConnectionManager::getInstance().wires) {
+    for (auto& wire : ConnectionManager::getInstance().getWires()) {
         if (wire->GetStartComponent() == component || wire->GetEndComponent() == component) {
             wire->UpdateConnectionsAfterRotation();
         }

@@ -6,6 +6,9 @@
 #include "../rendering/Renderer.h"
 #include <vector>
 
+const float MIN_ZOOM = 0.5f;
+const float MAX_ZOOM = 2.0f;
+
 class Input {
 public:
     static void HandleInput(ProgramState& currentState, 

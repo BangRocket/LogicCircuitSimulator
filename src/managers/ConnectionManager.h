@@ -19,6 +19,8 @@ public:
 
     void updateComponentPosition(Component* component, const Vector2& newPosition);
 
+    const std::vector<Wire*>& getWires() const { return wires; }
+
 private:
     ConnectionManager() = default;
     ~ConnectionManager();
