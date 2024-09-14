@@ -16,11 +16,11 @@
 #include <raymath.h>
 
 // Constants
-const int ORIGINAL_SCREEN_WIDTH = 800;
-const int ORIGINAL_SCREEN_HEIGHT = 600;
+const int ORIGINAL_SCREEN_WIDTH = 1024;
+const int ORIGINAL_SCREEN_HEIGHT = 768;
 
-int SCREEN_WIDTH = 800;
-int SCREEN_HEIGHT = 600;
+int SCREEN_WIDTH = 1024;
+int SCREEN_HEIGHT = 768;
 
 // Global variables
 ProgramState currentState = ProgramState::IDLE;

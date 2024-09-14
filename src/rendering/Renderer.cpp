@@ -164,24 +164,26 @@ void Renderer::DrawDebugInfo(ProgramState currentState, ComponentType currentCom
     int screenWidth = GetScreenWidth();
     int rightAlignX = screenWidth - 300; // Adjust this value to change the distance from the right edge
 
-    DrawText(TextFormat("FPS: %d", GetFPS()), rightAlignX, m_toolbarHeight + 10, 20, DARKGRAY);
-    DrawText(TextFormat("Components: %zd", m_componentManager.getComponents().size()), rightAlignX, m_toolbarHeight + 40, 20, DARKGRAY);
-    DrawText(TextFormat("Wires: %zd", m_wires.size()), rightAlignX, m_toolbarHeight + 70, 20, DARKGRAY);
+    DrawText(TextFormat("FPS: %d", GetFPS()), 10, m_toolbarHeight + 10, 20, DARKGRAY);
+    DrawText(TextFormat("Components: %zd", m_componentManager.getComponents().size()), 10, m_toolbarHeight + 40, 20, DARKGRAY);
+    DrawText(TextFormat("Wires: %zd", m_wires.size()), 10, m_toolbarHeight + 70, 20, DARKGRAY);
     DrawText(TextFormat("State: %s", 
         currentState == ProgramState::IDLE ? "IDLE" :
         currentState == ProgramState::PLACING_COMPONENT ? "PLACING" :
         currentState == ProgramState::CONNECTING_WIRE ? "CONNECTING" :
-        currentState == ProgramState::PANNING ? "PANNING" : "SELECTING"), rightAlignX, m_toolbarHeight + 100, 20, DARKGRAY);
+        currentState == ProgramState::PANNING ? "PANNING" : "SELECTING"), 10, m_toolbarHeight + 100, 20, DARKGRAY);
     DrawText(TextFormat("Current Component: %s", 
         currentComponentType == ComponentType::AND ? "AND" : 
         currentComponentType == ComponentType::OR ? "OR" : 
-        currentComponentType == ComponentType::NOT ? "NOT" : "INPUT"), rightAlignX, m_toolbarHeight + 130, 20, DARKGRAY);
-    DrawText(TextFormat("Camera Zoom: %.2f", m_camera.zoom), rightAlignX, m_toolbarHeight + 160, 20, DARKGRAY);
-    DrawText(TextFormat("Camera Target: (%.2f, %.2f)", m_camera.target.x, m_camera.target.y), rightAlignX, m_toolbarHeight + 190, 20, DARKGRAY);
-    DrawText(TextFormat("Placement Rotation: %.2f", placementRotation), rightAlignX, m_toolbarHeight + 220, 20, DARKGRAY);
-    DrawText(TextFormat("Debug Frames: %s", Component::AreDebugFramesEnabled() ? "ON" : "OFF"), rightAlignX, m_toolbarHeight + 250, 20, DARKGRAY);
-    DrawText(TextFormat("Mouse Position: (%.2f, %.2f)", mousePosition.x, mousePosition.y), rightAlignX, m_toolbarHeight + 280, 20, DARKGRAY);
-    DrawText(TextFormat("World Mouse Position: (%.2f, %.2f)", worldMousePos.x, worldMousePos.y), rightAlignX, m_toolbarHeight + 310, 20, DARKGRAY);
+        currentComponentType == ComponentType::NOT ? "NOT" : "INPUT"), 10, m_toolbarHeight + 130, 20, DARKGRAY);
+    DrawText(TextFormat("Camera Zoom: %.2f", m_camera.zoom), 10, m_toolbarHeight + 160, 20, DARKGRAY);
+    DrawText(TextFormat("Camera Target: (%.2f, %.2f)", m_camera.target.x, m_camera.target.y), 10, m_toolbarHeight + 190, 20, DARKGRAY);
+    DrawText(TextFormat("Placement Rotation: %.2f", placementRotation), 10, m_toolbarHeight + 220, 20, DARKGRAY);
+    DrawText(TextFormat("Debug Frames: %s", Component::AreDebugFramesEnabled() ? "ON" : "OFF"), 10, m_toolbarHeight + 250, 20, DARKGRAY);
+
+    // Mouse debug information on the right side
+    DrawText(TextFormat("Mouse Position: (%.2f, %.2f)", mousePosition.x, mousePosition.y), rightAlignX, m_toolbarHeight + 10, 20, DARKGRAY);
+    DrawText(TextFormat("World Mouse Position: (%.2f, %.2f)", worldMousePos.x, worldMousePos.y), rightAlignX, m_toolbarHeight + 40, 20, DARKGRAY);
 }
 
 Vector2 Renderer::ScreenToWorld(Vector2 screenPos) {
