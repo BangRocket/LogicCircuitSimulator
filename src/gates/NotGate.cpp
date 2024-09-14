@@ -24,8 +24,13 @@ void NotGate::Draw() const {
     Color tint = isHighlighted ? YELLOW : WHITE;
     Vector2 scaledSize = GetScaledSize();
     Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
-    Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
-    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };  // Set origin to center of texture
+    Rectangle dest = { 
+        position.x - scaledSize.x / 2, 
+        position.y - scaledSize.y / 2, 
+        scaledSize.x, 
+        scaledSize.y 
+    };
+    Vector2 origin = { 0, 0 };  // Set origin to top-left corner
     DrawTexturePro(texture, source, dest, origin, rotation, tint);
     
     // Draw a smaller version of the texture
