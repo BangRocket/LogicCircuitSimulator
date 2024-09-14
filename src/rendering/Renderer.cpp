@@ -79,10 +79,17 @@ void Renderer::Render(ProgramState currentState, Component* wireStartComponent, 
     
     if (currentState == ProgramState::PLACING_COMPONENT) {
         // Draw placement preview with rotation
-        DrawRotatedRectangleLinesEx(Rectangle{snappedPosition.x, snappedPosition.y, 64 * m_globalScaleFactor, 64 * m_globalScaleFactor}, placementRotation, 2, GREEN);
+        Vector2 componentSize = {GRID_SIZE * 2 * m_globalScaleFactor, GRID_SIZE * 2 * m_globalScaleFactor};
+        Rectangle previewRect = {
+            snappedPosition.x - componentSize.x / 2,
+            snappedPosition.y - componentSize.y / 2,
+            componentSize.x,
+            componentSize.y
+        };
+        DrawRotatedRectangleLinesEx(previewRect, placementRotation, 2, GREEN);
         
         // Draw rotation indicator
-        Vector2 rotationIndicator = { snappedPosition.x + 32 * m_globalScaleFactor, snappedPosition.y };
+        Vector2 rotationIndicator = { snappedPosition.x + componentSize.x / 2, snappedPosition.y };
         rotationIndicator = Vector2Rotate(Vector2Subtract(rotationIndicator, snappedPosition), placementRotation * DEG2RAD);
         rotationIndicator = Vector2Add(rotationIndicator, snappedPosition);
         DrawLineEx(snappedPosition, rotationIndicator, 2.0f, RED);
