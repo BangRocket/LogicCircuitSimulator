@@ -23,6 +23,12 @@ void Input::HandleInput(ProgramState& currentState,
     Vector2 worldMousePos = renderer->ScreenToWorld(mousePosition);
     Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
 
+    // Debug information
+    std::cout << "Mouse Position: (" << mousePosition.x << ", " << mousePosition.y << ")" << std::endl;
+    std::cout << "World Mouse Position: (" << worldMousePos.x << ", " << worldMousePos.y << ")" << std::endl;
+    std::cout << "Left Mouse Button: " << (IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? "DOWN" : "UP") << std::endl;
+    std::cout << "Current State: " << static_cast<int>(currentState) << std::endl;
+
     // Handle toolbar interactions
     if (mousePosition.y < renderer->GetToolbarHeight()) {
         if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
@@ -249,20 +255,30 @@ void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 world
             componentSize.y
         };
 
+        std::cout << "Component Position: (" << componentPos.x << ", " << componentPos.y << ")" << std::endl;
+        std::cout << "Component Bounds: (" << componentBounds.x << ", " << componentBounds.y << ", " 
+                  << componentBounds.width << ", " << componentBounds.height << ")" << std::endl;
+        std::cout << "Mouse in component bounds: " << (CheckCollisionPointRec(worldMousePos, componentBounds) ? "YES" : "NO") << std::endl;
+
         if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+            std::cout << "Mouse button is down" << std::endl;
             if (currentState == ProgramState::SELECTING) {
+                std::cout << "Current state is SELECTING" << std::endl;
                 // If we're in SELECTING state and the mouse is not over the component, start moving
                 if (!CheckCollisionPointRec(worldMousePos, componentBounds)) {
+                    std::cout << "Transitioning to MOVING_COMPONENT" << std::endl;
                     currentState = ProgramState::MOVING_COMPONENT;
                 }
             }
             
             if (currentState == ProgramState::MOVING_COMPONENT) {
+                std::cout << "Moving component" << std::endl;
                 Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
                 selectedComponent->SetPosition(snappedPosition);
                 UpdateWiresForComponent(selectedComponent);
             }
         } else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
+            std::cout << "Mouse button released, setting state to IDLE" << std::endl;
             // When the mouse button is released, always go back to IDLE state
             currentState = ProgramState::IDLE;
         }
