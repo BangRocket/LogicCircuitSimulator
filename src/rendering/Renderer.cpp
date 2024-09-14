@@ -75,8 +75,6 @@ void Renderer::Render(ProgramState currentState, Component* wireStartComponent, 
     }
     
     // Draw hover effects and placement preview
-    Vector2 mousePosition = GetMousePosition();
-    Vector2 worldMousePos = ScreenToWorld(mousePosition);
     Vector2 snappedPosition = SnapToGrid(worldMousePos);
     
     if (currentState == ProgramState::PLACING_COMPONENT) {
