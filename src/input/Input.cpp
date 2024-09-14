@@ -97,6 +97,9 @@ void Input::HandleInput(ProgramState& currentState,
                         if (inputSwitch) {
                             inputSwitch->ToggleState();
                         }
+
+                        // Handle component dragging
+                        HandleComponentDragging(clickedComponent, worldMousePos, renderer);
                     } else {
                         selectedComponent = nullptr;
                         currentState = ProgramState::IDLE;
@@ -186,9 +189,6 @@ void Input::HandleInput(ProgramState& currentState,
     }
 
     wireEndPos = worldMousePos;
-
-    // Handle component dragging
-    HandleComponentDragging(selectedComponent, worldMousePos, renderer);
 
     // Handle window resizing
     if (IsWindowResized()) {
