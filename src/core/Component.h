@@ -20,9 +20,18 @@ public:
     Vector2 GetPosition() const { return position; }
     void SetPosition(Vector2 newPosition) { position = newPosition; }
 
+    struct PinPosition {
+        float x;
+        float y;
+    };
+    
     virtual Vector2 GetInputPinPosition(int index) const;
     virtual Vector2 GetOutputPinPosition(int index) const;
     Vector2 GetPinPosition(int pinIndex) const;
+    
+protected:
+    std::vector<PinPosition> inputPins;
+    std::vector<PinPosition> outputPins;
     
     bool GetInputState(int inputIndex) const;
     bool GetOutputState(int outputIndex) const;
