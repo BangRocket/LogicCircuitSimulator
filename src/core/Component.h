@@ -64,6 +64,9 @@ public:
     static void ToggleDebugFrames() { showDebugFrames = !showDebugFrames; }
     static bool AreDebugFramesEnabled() { return showDebugFrames; }
 
+public:
+    static const int GRID_SIZE = 32; // Size of one grid cell
+
 protected:
     Vector2 position;
     std::string textureKey;
@@ -73,7 +76,6 @@ protected:
     std::vector<bool> inputStates;
     std::vector<bool> outputStates;
     bool isHighlighted;
-    static const int GRID_SIZE = 32; // Size of one grid cell
     Vector2 size = {GRID_SIZE * 4, GRID_SIZE * 4}; // Default size for all components (4x4 grid)
     ComponentManager* componentManager;
     float scale = 1.0f;
