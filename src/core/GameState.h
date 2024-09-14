@@ -5,7 +5,8 @@ enum class ProgramState {
     CONNECTING_WIRE,
     IDLE,
     PANNING,
-    SELECTING
+    SELECTING,
+    MOVING_COMPONENT
 };
 
 enum class ComponentType {
