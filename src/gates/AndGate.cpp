@@ -25,32 +25,19 @@ void AndGate::Draw() const {
     Color tint = isHighlighted ? YELLOW : WHITE;
     Vector2 scaledSize = GetScaledSize();
     Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
-    Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
-    Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };  // Set origin to center of texture
+    Rectangle dest = { 
+        position.x - scaledSize.x / 2, 
+        position.y - scaledSize.y / 2, 
+        scaledSize.x, 
+        scaledSize.y 
+    };
+    Vector2 origin = { 0, 0 };  // Set origin to top-left corner
     DrawTexturePro(texture, source, dest, origin, rotation, tint);
     
-    // Draw a smaller version of the texture
-    float smallerScale = 0.8f;  // Adjust this value to make the gate smaller within the 2x2 grid
-    Rectangle smallerDest = {
-        position.x,
-        position.y,
-        scaledSize.x * smallerScale,
-        scaledSize.y * smallerScale
-    };
-    Vector2 smallerOrigin = {
-        smallerDest.width / 2,
-        smallerDest.height / 2
-    };
-    DrawTexturePro(texture, source, smallerDest, smallerOrigin, rotation, tint);
     DrawPins();
 
     if (isHighlighted) {
-        DrawRectangleLinesEx(Rectangle{
-            position.x - scaledSize.x / 2,
-            position.y - scaledSize.y / 2,
-            scaledSize.x,
-            scaledSize.y
-        }, 2, ORANGE);
+        DrawRectangleLinesEx(dest, 2, ORANGE);
     }
     DrawDebugFrames();
 }

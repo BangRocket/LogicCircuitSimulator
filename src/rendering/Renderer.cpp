@@ -216,8 +216,13 @@ void Renderer::DrawRotatedComponent(const Component* component) {
     Vector2 size = component->GetScaledSize();
     
     Rectangle source = { 0, 0, (float)texture.width, (float)texture.height };
-    Rectangle dest = { position.x, position.y, size.x * m_camera.zoom, size.y * m_camera.zoom };
-    Vector2 origin = { size.x * m_camera.zoom / 2, size.y * m_camera.zoom / 2 };
+    Rectangle dest = { 
+        position.x - size.x / 2, 
+        position.y - size.y / 2, 
+        size.x, 
+        size.y 
+    };
+    Vector2 origin = { 0, 0 };  // Set origin to top-left corner
     
     DrawTexturePro(texture, source, dest, origin, rotation, WHITE);
     component->DrawPins();
