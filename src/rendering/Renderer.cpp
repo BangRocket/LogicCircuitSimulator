@@ -3,6 +3,7 @@
 #include "../circuit_elements/Wire.h"
 #include "../managers/ComponentManager.h"
 #include "../core/GameState.h"
+#include "../core/Grid.h"
 #include <raymath.h>
 
 Renderer::Renderer(Camera2D& camera, ComponentManager& componentManager, std::vector<Wire*>& wires)
@@ -79,7 +80,7 @@ void Renderer::Render(ProgramState currentState, Component* wireStartComponent, 
     
     if (currentState == ProgramState::PLACING_COMPONENT) {
         // Draw placement preview with rotation
-        Vector2 componentSize = {GRID_SIZE * 2 * m_globalScaleFactor, GRID_SIZE * 2 * m_globalScaleFactor};
+        Vector2 componentSize = {Grid::GRID_SIZE * 2 * m_globalScaleFactor, Grid::GRID_SIZE * 2 * m_globalScaleFactor};
         Rectangle previewRect = {
             snappedPosition.x - componentSize.x / 2,
             snappedPosition.y - componentSize.y / 2,
