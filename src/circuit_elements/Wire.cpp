@@ -20,7 +20,7 @@ Wire::~Wire()
 void Wire::Update()
 {
     // Update the wire's signal state based on the start component's output
-    signalState = startComponent->GetOutputState(startPinIndex);
+    signalState = startComponent->GetOutputState(startPinIndex - startComponent->GetNumInputs());
     
     // Propagate the signal to the end component
     endComponent->SetInputState(endPinIndex, signalState);
@@ -121,8 +121,7 @@ void Wire::RecalculateWirePath()
     };
 
     // Determine the best path based on component orientations
-    float startAngle = startComponent->GetRotation();
-    float endAngle = endComponent->GetRotation();
+    // Remove these lines as they are not necessary for the wire's functionality
 
     // Simplified path calculation (can be improved for more complex routing)
     if (std::abs(startPos.x - endPos.x) > std::abs(startPos.y - endPos.y)) {
