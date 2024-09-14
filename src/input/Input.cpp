@@ -6,6 +6,7 @@
 #include "../gates/NotGate.h"
 #include "../circuit_elements/InputSwitch.h"
 #include <iostream>
+#include <raymath.h>
 
 void Input::HandleInput(ProgramState& currentState, 
                         ComponentType& currentComponentType,
@@ -72,7 +73,7 @@ void Input::HandleInput(ProgramState& currentState,
         
         float prevZoom = camera.zoom;
         camera.zoom += wheel * 0.05f;
-        camera.zoom = Clamp(camera.zoom, 0.5f, 2.0f);
+        camera.zoom = Clamp(camera.zoom, MIN_ZOOM, MAX_ZOOM);
         
         // Update component scales
         float scaleChange = camera.zoom / prevZoom;
@@ -85,6 +86,7 @@ void Input::HandleInput(ProgramState& currentState,
         switch (currentState) {
             case ProgramState::IDLE:
             case ProgramState::SELECTING:
+            case ProgramState::PANNING:
                 {
                     Component* clickedComponent = GetComponentAtPosition(worldMousePos);
                     if (clickedComponent) {
@@ -207,7 +209,7 @@ int Input::GetPinAtPosition(Component* component, Vector2 position) {
 }
 
 void Input::UpdateWiresForComponent(Component* component) {
-    for (auto& wire : ConnectionManager::getInstance().getWires()) {
+    for (auto& wire : ConnectionManager::getInstance().wires) {
         if (wire->GetStartComponent() == component || wire->GetEndComponent() == component) {
             wire->UpdateConnectionsAfterRotation();
         }
