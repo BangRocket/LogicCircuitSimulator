@@ -87,6 +87,7 @@ void Input::HandleInput(ProgramState& currentState,
             case ProgramState::IDLE:
             case ProgramState::SELECTING:
             case ProgramState::PANNING:
+            case ProgramState::MOVING_COMPONENT:
                 {
                     Component* clickedComponent = GetComponentAtPosition(worldMousePos);
                     if (clickedComponent) {
@@ -97,9 +98,6 @@ void Input::HandleInput(ProgramState& currentState,
                         if (inputSwitch) {
                             inputSwitch->ToggleState();
                         }
-
-                        // Handle component dragging
-                        HandleComponentDragging(clickedComponent, worldMousePos, renderer);
                     } else {
                         selectedComponent = nullptr;
                         currentState = ProgramState::IDLE;
@@ -237,10 +235,19 @@ Wire* Input::GetWireAtPosition(Vector2 position) {
     return nullptr;
 }
 
-void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 worldMousePos, Renderer* renderer) {
-    if (selectedComponent && IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-        Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
-        selectedComponent->SetPosition(snappedPosition);
-        UpdateWiresForComponent(selectedComponent);
+void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 worldMousePos, Renderer* renderer, ProgramState& currentState) {
+    if (selectedComponent) {
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
+            if (currentState == ProgramState::SELECTING) {
+                currentState = ProgramState::MOVING_COMPONENT;
+            }
+            if (currentState == ProgramState::MOVING_COMPONENT) {
+                Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
+                selectedComponent->SetPosition(snappedPosition);
+                UpdateWiresForComponent(selectedComponent);
+            }
+        } else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON) && currentState == ProgramState::MOVING_COMPONENT) {
+            currentState = ProgramState::SELECTING;
+        }
     }
 }
