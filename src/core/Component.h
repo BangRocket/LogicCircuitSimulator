@@ -76,7 +76,7 @@ protected:
     std::vector<bool> inputStates;
     std::vector<bool> outputStates;
     bool isHighlighted;
-    Vector2 size = {GRID_SIZE * 4, GRID_SIZE * 4}; // Default size for all components (4x4 grid)
+    Vector2 size = {GRID_SIZE * 2, GRID_SIZE * 2}; // Default size for all components (2x2 grid)
     ComponentManager* componentManager;
     float scale = 1.0f;
     float rotation = 0.0f;

@@ -3,7 +3,7 @@
 #include <iostream>
 #include <raymath.h>
 
-const float InputSwitch::SWITCH_RADIUS = 15.0f;
+const float InputSwitch::SWITCH_RADIUS = 10.0f;
 
 InputSwitch::InputSwitch(Vector2 position) : Component(position, "input_switch", 0, 1), state(false) {
     std::cout << "InputSwitch created at position: (" << position.x << ", " << position.y << ")" << std::endl;

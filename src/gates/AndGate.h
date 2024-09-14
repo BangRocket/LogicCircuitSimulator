@@ -14,7 +14,7 @@ public:
 
 protected:
     // Override the default size if needed
-    Vector2 size = {100, 100}; // Specific size for AND gate
+    // Using the default size from Component class
 };
 
 #endif // AND_GATE_H

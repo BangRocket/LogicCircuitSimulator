@@ -23,6 +23,20 @@ void NotGate::Draw() const {
     Rectangle dest = { position.x, position.y, scaledSize.x, scaledSize.y };
     Vector2 origin = { scaledSize.x / 2, scaledSize.y / 2 };  // Set origin to center of texture
     DrawTexturePro(texture, source, dest, origin, rotation, tint);
+    
+    // Draw a smaller version of the texture
+    float smallerScale = 0.8f;  // Adjust this value to make the gate smaller within the 2x2 grid
+    Rectangle smallerDest = {
+        position.x,
+        position.y,
+        scaledSize.x * smallerScale,
+        scaledSize.y * smallerScale
+    };
+    Vector2 smallerOrigin = {
+        smallerDest.width / 2,
+        smallerDest.height / 2
+    };
+    DrawTexturePro(texture, source, smallerDest, smallerOrigin, rotation, tint);
     DrawPins();
 
     if (isHighlighted) {
