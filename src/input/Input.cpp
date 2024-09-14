@@ -243,6 +243,8 @@ Wire* Input::GetWireAtPosition(Vector2 position) {
 }
 
 void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 worldMousePos, Renderer* renderer, ProgramState& currentState) {
+    static Vector2 dragOffset = {0, 0};
+
     if (selectedComponent) {
         Vector2 componentPos = selectedComponent->GetPosition();
         Vector2 componentSize = selectedComponent->GetScaledSize();
@@ -253,31 +255,21 @@ void Input::HandleComponentDragging(Component*& selectedComponent, Vector2 world
             componentSize.y
         };
 
-        std::cout << "Component Position: (" << componentPos.x << ", " << componentPos.y << ")" << std::endl;
-        std::cout << "Component Bounds: (" << componentBounds.x << ", " << componentBounds.y << ", " 
-                  << componentBounds.width << ", " << componentBounds.height << ")" << std::endl;
-        std::cout << "World Mouse Position: (" << worldMousePos.x << ", " << worldMousePos.y << ")" << std::endl;
-        std::cout << "Mouse in component bounds: " << (CheckCollisionPointRec(worldMousePos, componentBounds) ? "YES" : "NO") << std::endl;
+        if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+            if (CheckCollisionPointRec(worldMousePos, componentBounds)) {
+                currentState = ProgramState::MOVING_COMPONENT;
+                dragOffset = Vector2Subtract(componentPos, worldMousePos);
+            }
+        }
 
-        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON)) {
-            //std::cout << "Mouse button is down" << std::endl;
-            if (currentState == ProgramState::SELECTING) {
-                //std::cout << "Current state is SELECTING" << std::endl;
-                // If we're in SELECTING state and the mouse is over the component, start moving
-                if (CheckCollisionPointRec(worldMousePos, componentBounds)) {
-                    //std::cout << "Transitioning to MOVING_COMPONENT" << std::endl;
-                    currentState = ProgramState::MOVING_COMPONENT;
-                }
-            }
-            
-            if (currentState == ProgramState::MOVING_COMPONENT) {
-                //std::cout << "Moving component" << std::endl;
-                Vector2 snappedPosition = renderer->SnapToGrid(worldMousePos);
-                selectedComponent->SetPosition(snappedPosition);
-                UpdateWiresForComponent(selectedComponent);
-            }
-        } else if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
-            //std::cout << "Mouse button released, setting state to IDLE" << std::endl;
+        if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && currentState == ProgramState::MOVING_COMPONENT) {
+            Vector2 newPosition = Vector2Add(worldMousePos, dragOffset);
+            Vector2 snappedPosition = renderer->SnapToGrid(newPosition);
+            selectedComponent->SetPosition(snappedPosition);
+            UpdateWiresForComponent(selectedComponent);
+        }
+
+        if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON)) {
             currentState = ProgramState::IDLE;
         }
     }
