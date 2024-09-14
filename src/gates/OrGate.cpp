@@ -61,6 +61,18 @@ bool OrGate::IsHovered(Vector2 mousePosition) {
     return CheckCollisionPointRec(mousePosition, {topLeft.x, topLeft.y, scaledSize.x, scaledSize.y});
 }
 
+Vector2 OrGate::GetInputPinPosition(int index) const {
+    Vector2 localPos;
+    if (index == 0) {
+        localPos = { -size.x / 2, -size.y / 2 + 30 };
+    } else {
+        localPos = { -size.x / 2, size.y / 2 - 30 };
+    }
+    localPos = Vector2Scale(localPos, scale);
+    localPos = Vector2Rotate(localPos, rotation * DEG2RAD);
+    return Vector2Add(position, localPos);
+}
+
 Vector2 OrGate::GetOutputPinPosition(int index) const {
     Vector2 localPos = { size.x / 2, 0 };
     localPos = Vector2Scale(localPos, scale);
