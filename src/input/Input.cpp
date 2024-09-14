@@ -102,6 +102,8 @@ void Input::HandleInput(ProgramState& currentState,
                         selectedComponent = nullptr;
                         currentState = ProgramState::IDLE;
                     }
+                    // Handle component dragging
+                    HandleComponentDragging(selectedComponent, worldMousePos, renderer, currentState);
                 }
                 break;
             case ProgramState::PLACING_COMPONENT:
