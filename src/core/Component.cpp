@@ -232,22 +232,6 @@ Texture2D Component::GetTexture() const
 
 Vector2 Component::GetOrigin() const
 {
-    return { 0, 0 };  // Set origin to top-left corner
-}
-
-Rectangle Component::GetDestRect() const
-{
-    Vector2 scaledSize = GetScaledSize();
-    return { 
-        position.x - scaledSize.x / 2, 
-        position.y - scaledSize.y / 2, 
-        scaledSize.x, 
-        scaledSize.y 
-    };
-}
-
-Vector2 Component::GetOrigin() const
-{
     Vector2 scaledSize = GetScaledSize();
     return { scaledSize.x / 2, scaledSize.y / 2 };
 }
