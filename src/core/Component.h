@@ -33,6 +33,7 @@ protected:
     std::vector<PinPosition> inputPins;
     std::vector<PinPosition> outputPins;
     
+public:
     bool GetInputState(int inputIndex) const;
     bool GetOutputState(int outputIndex) const;
     void SetInputState(int inputIndex, bool state);
@@ -65,6 +66,9 @@ protected:
     void Rotate(float angle);
     float GetRotation() const;
     void SetRotation(float newRotation);
+
+public:
+    static const int GRID_SIZE = 32; // Size of one grid cell
 
     static const float PIN_RADIUS;
     static const float PIN_HOVER_RADIUS;
